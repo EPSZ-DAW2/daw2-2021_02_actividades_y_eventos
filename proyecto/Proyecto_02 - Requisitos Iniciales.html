@@ -1,0 +1,475 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Proyecto en Grupo - 2. Requisitos Iniciales</title>
+</head>
+<body>
+<div class="bloque" style="font-family:arial;font-size:1.25em;text-align:justify;border:1.5mm solid #508050;margin:0.25em;padding:1em;">
+
+<div class="titulo titulo1" style="margin:5mm;font-size:2.0em;font-weight:bold">Proyecto en Grupo</div>
+<div class="titulo titulo2" style="margin:5mm;font-size:1.5em;font-weight:bold">2. Requisitos Iniciales.</div>
+
+<br/>
+&nbsp;&nbsp;&nbsp;Se desea diseñar una aplicación web para la <strong>Publicación, Difusión y Gestión de Actividades y Eventos.</strong>.
+<br/>
+<br/>
+&nbsp;&nbsp;&nbsp;La aplicación será un portal web en el que principalmente se podrán buscar y consultar Actividades y Eventos de cualquier tipo que estén registrados y dados de alta en el sistema.
+<br/>
+&nbsp;&nbsp;&nbsp;Las búsquedas se podrán realizar mediante un sistema de filtros por tipo de actividad (clasificación de actividades), por fechas, lugares, etc, y el resultado se mostrará como una lista resumida de actividades, paginada si son muchas, que coincidan con el filtro de búsqueda seleccionado o introducido... 
+¡Eso sí! -siempre que sean visibles públicamente, ya que existirá un control para que los usuarios &quot;no registrados&quot; no puedan ver todas las actividades, sino sólo las marcadas como públicas. 
+<br/>
+&nbsp;&nbsp;&nbsp;Se podrá elegir una actividad para visualizar su ficha en detalle, con su título, denominación, descripción, características, fecha o fechas, duración (si se conoce), ubicación o lugar de realización, número de participantes -si es actividad restringida en la que deben registrarse los usuarios como participantes-, fotografía o fotografías de la actividad, etc.
+<br/>
+&nbsp;&nbsp;&nbsp;La aplicación además permitirá a los usuarios registrados crear nuevas actividades, apuntarse/borrarse como participante en las actividades que desee, recibir avisos de los cambios en las actividades, entre otras funciones.
+<br/>
+<br/>
+
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Requerimientos para el Público en general:</div>
+<div style="text-align:justify;margin:0em">
+<ul>
+  <li><strong>Portada &quot;Previa&quot;:</strong> Una página inicial sencilla en la que se mostrará el logotipo del portal y la información de la utilidad del mismo, así como una zona para poder acceder a la aplicación como usuario y/o poder registrarse. No se mostrará información de las actividades hasta que no se inicie sesión por parte del usuario. Esta página es opcional y se mostrará si se considera necesario &quot;proteger&quot; el portal para que no accedan los usuarios &quot;no registrados&quot;.
+  </li>
+  <br/>
+  
+  <li><strong>Portada &quot;Inicial&quot;:</strong> Una página inicial más compleja en la que se mostrará el logotipo del portal, una zona con una barra de navegación por las diferentes opciones de la aplicación, una zona de acceso a la misma (Login / Registro / Logout), un menú de selección de clasificación de actividades a la izquierda (visible según tamaño de pantalla o dispositivo móvil), unas serie de bloques o zonas en la parte central con las &quot;fichas resumen&quot; de las N actividades más próximas en el tiempo, más recientes, más visitadas, más buscadas, más valoradas, recomendadas (del mes, de la semana), según geolocalización del navegador cliente del usuario, o cualquier tipo de control que sirva para recomendar las actividades a los usuarios. Además se tendrá una zona con el posible buscador de actividades para realizar filtros o un enlace para acceder a la zona de búsqueda. En la parte derecha se mostrarán una serie de anuncios o similar de los posibles patrocinadores del portal o de las actividades que se están mostrando en ese momento en la página.
+    <ul>
+      <li>Si se activa cualquier filtro de clasificación o de búsqueda, se podrá pulsar un botón de &quot;Filtrar&quot; o &quot;Buscar&quot; para que cambie el contenido central acorde con el filtro. En este caso, la lista de actividades resultantes deberá salir paginada con unas 10 &quot;fichas resumen&quot; por página, permitiendo movernos entre las posibles páginas resultantes. Se debe poder cambiar el número de resultados por página mediante un desplegable predefinido en el que se tendrán las opciones 10, 25, 50, 100 y Todas.
+      </li>
+      <li>Si se desactiva un filtro que está activado, se volverá a mostrar la vista inicial o página principal de actividades recomendadas.
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Ver Actividad:</strong> Si se selecciona una de las &quot;fichas resumen&quot; se accederá a la ficha detalle de la actividad, debiendo poderse volver hacia atrás a la selección que estaba activada en ese momento, para lo cual se debe recordar dicha selección (por ejemplo en sesión o manteniendo los parámetros &quot;GET&quot;) para volver a aplicarla al mostrar la página principal.
+    <ul>
+      <li>Si el usuario que está visitando la actividad es un usuario registrado, se podrá <strong>activar el seguimiento</strong> de la actividad, es decir, que cualquier cambio o actualización de la misma hará que se agregue una notificación para el usuario avisando de ello. Así mismo, un usuario registrado que tenga activado el seguimiento podrá <strong>desactivarlo</strong> en cualquier momento, bien sea visitando la actividad en cuestión, o desde una opción que tendrán los usuarios para ver todas las actividades que tiene en seguimiento.
+      </li>
+      <li>Si la actividad tiene configurada la opción de &quot;<strong>permitir el registro de participantes</strong>&quot; (con o sin límite, y con o sin margen de reserva), se informará del número de participantes registrados, el posible límite total admitido, el posible margen de reserva y la posibilidad de <strong>apuntarse</strong> (si no lo está ya) o de <strong>borrarse</strong> (si ya está), mostrando una opción para poder pulsar y acceder al registro de la actividad. Esta opción aparecerá independientemente de que el usuario que está visitando la página de la actividad está registrado o no, siendo necesario en el segundo de los casos pasar por la página de acceso antes de poder apuntarse como participante de la actividad.
+        <ul>
+          <li>Para apuntarse a una actividad, aparte de ser usuario registrado, se deberán rellenar los datos adicionales que se soliciten en el registro de dicha actividad, siendo rellenados automáticamente los datos conocidos por ser usuario registrado, es decir, que si para la actividad se necesita o se solicita el Nombre, Apellidos, Fecha Nacimiento, Talla de Camiseta, ..., y en la ficha del usuario se tienen ya el Nombre y Apellidos, estos dos datos aparecerán rellenados en el registro de la actividad y no se podrán modificar.
+          </li>
+          <li>Teniendo en cuenta lo anterior, el permitir el registro de participantes en una actividad viene asociado opcionalmente con un formulario de datos para almacenar detalles adicionales de los usuarios que participarán, por tanto es necesario poder configurar los datos/campos del formulario que deberán aparecer. En principio estos datos adicionales no se podrán usar para hacer búsquedas ya que son propios de cada actividad y/o diferentes para cada una de ellas, pero sí que se deben poder obtener listados de los participantes con esos datos e incluso un archivo de texto delimitado (tipo .CSV) para exportar la información de cara al gestor/responsable de la actividad.
+          </li>
+          <li>Para borrarse como participante de una actividad, aparte de ser usuario registrado, se deberá confirmar la cancelación y rellenar el motivo de la misma (puede ser opcional). Se informará adecuadamente del funcionamiento de la cancelación de una participación para que el usuario tenga claro que no va a poder apuntarse de nuevo.
+          <br/>
+          *** Cuando un usuario cancela su participación, se genera automáticamente una notificación de dicha situación para el mismo usuario, así lo tiene en su registro de avisos, y también se activa como participante un usuario que esté en reserva (si los hubiera), notificándole en su caso la nueva situación.
+          </li>
+        </ul>
+      </li>
+      <li>La actividad tendrá una opción desde la que podrá ser denunciada/censurada por otros usuarios en caso de que consideren que su contenido no es apropiado o adecuado para el sitio. Para el control de las denuncias de la actividad se almacenará un contador de denuncias (inicialmente a cero) y la fecha/hora de la primera denuncia, y en caso de que se alcance un mínimo de denuncias (configurado en el sistema), pasará a estar bloqueada temporalmente hasta que sea resuelta (desbloqueada) por un moderador o administrador. Se almacenará la incidencia como un aviso para los moderadores o administradores del sitio en el que se relacionará la clase de alerta, la actividad, el momento, el usuario que hace la denuncia y una nota acerca del motivo de la denuncia, por tanto, para poder denunciar un comentario el usuario deberá haber accedido al sitio como usuario registrado.
+      </li>
+      <li>La actividad ofrecerá también la posibilidad de votar a favor o en contra de ella, para lo que se mantendrán dos contadores de votos, uno a favor y otro en contra, mostrándose el recuento en la ficha de la actividad y la forma de votar en uno u otro sentido.
+      </li>
+      <li>La actividad dispondrá de comentarios moderados que podrán crear los usuarios registrados, en los que al menos se tendrá la fecha/hora del comentario, el texto escrito por el usuario y el nombre abreviado del usuario, no permitiendo crear elementos HTML potencialmente dañinos para la página. Los comentarios se publicarán lo antes posible tras la introducción del usuario que los crea, pero podrán ser denunciados/censurados por otros usuarios, o corregidos y/o anulados por los administradores si no son adecuados. Para poder denunciar un comentario en cada entrada reciente (de menos de un tiempo preestablecido/configurado) aparecerá una opción para que otros usuarios registrados lo puedan hacer, en ese caso se almacenará un aviso para los administradores del sitio en el que se relacionará la clase de alerta, el comentario, el momento y el usuario que lo denuncia, y una nota acerca del motivo de la denuncia.
+      </li>
+      <br/>
+      
+      <li>En general la vista de la actividad completa tendrá:
+        <ul type="none" style="padding-left:1.25em">
+          <li>- Título, Descripción, Notas, ...</li>
+          <li>- Fechas (inicio,fin), </li>
+          <li>- Lugar (direccion / ubicacion, población, provincia, estado, país) &rarr; muy importante para los filtros.</li>
+          <li>- Foto/Fotos, o Fotos/Iconos asociados a las Categorías marcadas en la actividad.</li>
+          <li>- Edad recomendada (rangos de edad),</li>
+          <li>- Aforo Limitado o no, Margen reserva (si se considera necesario),</li>
+          <li>- Participantes vinculados (según se considere hacer visible).</li>
+          <li>- Estado de la actividad (visible, activada/terminada -realizada, suspendida- ).</li>
+          <li>- Estado del administrador (bloqueada, motivo)</li>
+          <li>- Información adicional (datos que se solicitan en la participación, ...)</li>
+          <li>- URL externa relacionada con la actividad (en caso de tener web externa)</li>
+          <li>- Apartado de Historico de la actividad, o Actividades Relacionadas con ésta, ...</li>
+          <li>- Comentarios de la actividad.</li>
+          <li>- Patrocinadores más relevantes de la actividad por categorías marcadas.</li>
+          <li>- Patrocinadores concretos o específicos de la actividad.</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Agrupaciones por Categorias:</strong> Aunque se ha indicado que existirán unos filtros de clasificación, se puede disponer de alguna sección que mostrará las actividades según un posible árbol de clasificación de categorias, para poder centrarse en un tipo de actividad concreta, como por ejemplo: <strong>&quot;Deportes&quot; &rarr; &quot;Aire Libre&quot; &rarr; &quot;Maratón&quot;</strong>.
+  <br/>
+  *** Para poder establecer un árbol de categorías, las clasificaciones o etiquetas aparte de ser generales y poder asociar una actividad o evento con varias de ellas, se deberían poder agrupar en diferentes sectores de actividad para gestionarlas en bloque.
+  </li>
+  <br/>
+  
+  <li><strong>Mapas de Actividad:</strong> Apartado donde poder ubicar de forma gráfica con un mapa las diferentes actividades que se realizan en el radio de acción de la zona indicada en el mapa, mostrando el recuento de actividades cuando el zoom del mapa está muy alejado (mapa muy extenso), o mostrando de forma única la actividad cuando se está en un zoom del mapa muy cercano pudiéndo activar la ficha resumen de la actividad al situar encima el ratón.
+  <br/>
+  *** Las actividades indicadas en los mapas se deberían poder filtrar por los clasificadores existentes, activando o desactivando los que el usuario desee y actualizando el recuento o indicadores según los filtros establecidos.
+  </li>
+  <br/>
+  
+  <li><strong>Calendario de Actividades:</strong> Apartado donde ver marcadas las fechas de realización de las actividades en forma de calendario, mostrando el recuento de actividades cuando el calendario es muy extenso (meses) o el número de actividades en un día supera un número determinado (configurable), o mostrando los títulos de las actividades en cada día y permitiendo activar la ficha resumen de la actividad al situar encima el ratón.
+  <br/>
+  *** Las actividades indicadas en el calendario se deberían poder filtrar aparte de por fechas mostradas en el calendario, por los clasificadores y zonas existentes, activando o desactivando lo que el usuario desee y actualizando el recuento o títulos según los filtros establecidos.
+  </li>
+  <br/>
+  
+  <li><strong>Patrocinadores:</strong> Para que el portal tenga un sentido algo más <em>&quot;comercial&quot;</em>, se introduce la idea de los patrocinios, bien a nivel global del portal, a nivel general de sectores de actividad o de agrupación de categorías, o a nivel más concreto por actividad. Según cada tipo de patrocinio, se mostrarán los anunciantes en las diferentes páginas que se generan en el portal.
+    <ul type="none" style="padding-left:1.25em">
+      <li>* Patrocinadores globales del portal.</li>
+      <li>* Patrocinadores generales de un sector o sectores de actividad.</li>
+      <li>* Patrocinadores concretos de una actividad.</li>
+    </ul>
+    *** Estos patrocinadores podrán opcionalmente ser usuarios del portal para poder gestionar sus anuncios y patrocinios entre los diferentes tipos establecidos y/o actividades existentes, incluso crear actividades bajo su propio patrocinio.
+  </li>
+  <br/>
+  
+  <li><strong>Registro y Acceso de Usuarios:</strong> Para que un usuario pueda colaborar en la web proporcionando actividades, comentarios a las actividades o apuntarse como participante en ellas, deberá estar registrado y haber accedido a la aplicación como tal. Para ello se dispondrá de una gestión de usuarios y de un registro de cara al público para que puedan introducir sus datos de acceso y crearse como usuarios del sistema, pero no podrán acceder hasta que no hayan confirmado su registro mediante una validación del correo electrónico y/o un administrador así lo considere.
+  <br/>
+  *** En el acceso de usuarios existirá un control de intentos fallidos el cual servirá para bloquear a los usuarios que fallan el acceso un número predeterminado de intentos durante un intervalo de tiempo prefijado, para ello se tendrá al menos una fecha/hora del acceso y un contador de intentos fallidos. Cuando hay un acceso válido se almacenará la fecha/hora del momento y se establece el contador a cero. Cuando hay un acceso no válido, el contador se incrementa y si es el primer fallo, se almacenará la fecha/hora del momento, pero si no lo es, se comprueba el número de intentos frente al límite de fallos predetermiado, el cual si se supera, se bloquerá el acceso del usuario durante un intervalo de tiempo prefijado, el cual debe transcurrir antes de volver a permitir el acceso, para ello se calcula la diferencia de tiempo desde el primer acceso fallido hasta el momento del acceso actual y si se supera el intervalo configurado, se reinicia el contador a cero antes de seguir con el proceso de comprobación. De cada situación fallida se guardará un registro en un archivo de &quot;Log&quot; (o tabla en la base de datos) y se informará al usuario debidamente con los intentos pendientes antes de ser bloqueado o del tiempo restante antes de ser desbloqueado automáticamente.
+  </li>
+  <br/>
+  
+  <li><strong>Opciones de Usuarios Registrados:</strong> Un usuario registrado pasa a ser automáticamente colaborador del sitio, con lo que aparte de poder consultar todas las actividades disponibles y establecer sus preferencias, podrá agregar/corregir comentarios, apuntarse como participante, etc.
+    <ul>
+      <li><strong>Mi Perfil:</strong> Podrá mantener su propia ficha de registro de usuario, tanto de los datos básicos de acceso (cambio de contraseña, de cuenta de correo), los datos del perfil del usuario (identificación, localización, contacto, ...), como de los datos adicionales que puede haber ido introduciendo en los diferentes registros de participación de actividades.
+      <br/>
+      *** El usuario tendrá la opción de poder enviar una nota (como una clase de alerta) al moderador o administrador del sitio para comentarle cualquier cuestión que le surja. Este tipo de notas se gestionarán como cualquier aviso de alerta del sistema, pero con un indicador de &quot;nota&quot; o &quot;consulta&quot;.
+      </li>
+      <li><strong>Avisos y Notificaciones:</strong> Será una sección donde el usuario podrá visualizar y gestionar (marcar/desmarcar como leídos) todos y cada uno de los avisos/notificaciones que le lleguen en función de las actividades que tenga en seguimiento, las que esté registrado como participante u otro tipo de avisos del sistema.
+      <br/>
+      *** En esta sección se habilitará un apartado para poder establecer la configuración de las opciones de recepción de los avisos y notificaciones, como por ejemplo si se desea recibir por correo electrónico los avisos, bien de manera inmediata, o un resumen acumulado de avisos al final del día, etc.
+      </li>
+      <li><strong>Actividades Propias:</strong> Será una sección donde el usuario podrá navegar/ver y/o gestionar las actividades que haya dado de alta en el sitio. La lista de actividades se visualizará de la forma más cómoda posible para poder filtrar en función del estado, de la fecha de creación, la fecha de terminación, etc.
+      <br/>
+      *** En la gestión de una actividad, se podrán hacer cambios en la misma siempre que no afecten al funcionamiento del sitio, es decir, se puede reconfigurar o eliminar una actividad mientras está en modo invisible o en activo sin participantes registrados, generando en su caso los avisos de cambio correspondiente a los usuarios que siguen la actividad. Se podrá cancelar/suspender la actividad indicando el motivo, almacenando también la fecha/hora de la cancelación, por supuesto avisando a los usuarios que la siguen o participantes si los hubiera. También se podrá bloquear temporalmente o desbloquear por parte de los moderadores o administradores indicando el motivo del bloqueo (habitualmente por denuncia).
+      <br/>
+      *** Si una actividad propia fuera bloqueada, se debería poder ver el momento y el motivo del bloqueo, permitiéndose subsanar el problema en un plazo de tiempo determinado y, posteriormente, poder avisar al moderador o administrador de que ya ha sido corregido para que nos desbloquee la actividad.
+      <br/>
+      *** Si la actividad admite registro de participantes, se podrá ver/exportar la lista de los mismos con la información introducida en la ficha de datos adicionales. También se podrá mantener avisos a los usuarios participantes en caso de que haya información no válida, errónea o posiblemente malintencionada en los registros de participación.
+      </li>
+      <li><strong>Actividades en Seguimiento:</strong> Será una sección donde el usuario podrá navegar/ver de una forma rápida las actividades en las ha activado el seguimiento (sobre las que recibirá avisos y notificaciones). Podrá desactivar el seguimiento en cualquier momento que lo desee, aunque de forma automática se desactivará cuando una actividad se marca como terminada tras haber notificado al usuario adecuadamente.
+      </li>
+      <li><strong>Actividades como Participante:</strong> Desde esta sección, el usuario podrá navegar/ver de una forma rápida las actividades en las que se ha registrado como participante (sobre las que recibirá avisos y notificaciones). Podrá gestionar la información introducida en las fichas de datos de participación de esas actividades mientras estén activas (que no se hayan marcado como terminadas). Además el usuario podrá cancelar su participación en la actividad en cualquier momento (si está aún activa) almacenándose la fecha/hora de la cancelación y una nota con el motivo (opcional). Una vez cancelada la participación a una actividad, no se podrá volver a registrar como participante, por tanto se informará adecuadamente al usuario antes de que llegue a confirmar su cancelación.
+      <br/>
+      *** Las actividades terminadas no deberían aparecer en esta sección, pero se debería poder acceder a ellas desde un apartado o subsección que se podría denominar &quot;Histórico de Actividades como Participante&quot;.
+      </li>
+      <li><strong>Comentarios en Actividades:</strong> Sección desde donde el usuario podrá navegar/ver de una forma rápida aquellas actividades en las que ha añadido algún comentario. Un comentario no podrá ser modificado una vez creado a menos que sea solicitado/activado por un moderador u administrador del sitio, ya que de lo contrario se podrían estar cambiando los comentarios sin control alguno. Además, para su correcta gestión, los comentarios almacenarán como mínimo la relación con la actividad, la fecha/hora de creación, el usuario que la ha creado, la fecha/hora de la última modificación, el usuario que la ha modificado (habitualmente el mismo que la crea), y el texto del comentario.
+      <br/>
+      *** Si bien un comentario está relacionado directamente con una actividad, existe la posibilidad de que un comentario también esté relacionado con otro comentario en el caso de permitir hacer comentarios &quot;respuesta&quot;, para lo cual se necesitaría básicamente almacenar el identificador del comentario al que se hace referencia y que en el interfaz web donde se muestran los comentarios se introdujera una opción para crear un comentario de &quot;réplica&quot; o &quot;respuesta&quot; a cada uno de ellos. También se necesitaría el que un moderador o administrador pudiera bloquear o cerrar la opción de crear respuestas a un comentario &quot;final&quot;. Con esta posibilidad implementada se podrían crear &quot;grafos&quot; o &quot;árboles&quot; de los comentarios encadenados.
+      </li>
+      <li><strong>Alertas y Notas:</strong> Esta opción se mostrará cuando el usuario sea administrador o esté activado como moderador de una o varias zonas. Será una sección donde se podrá navegar/ver y gestionar todos los avisos de denuncias recibidos de actividades, o denuncias de comentarios introducidos, o notas que los usuarios envían directamente a la administración del sitio, pero sólamente de la zona o zonas que modera. En caso de que el usuario sea de tipo administrador del sitio, podrá ver todos los avisos.
+      <br/>
+      *** Esta sección quizá se deba separar en dos, una para la gestión de alertas sobre actividades y comentarios, y otra para la gestión de notas de los usuarios, pero quizá se pueda mantener en una única vista si se gestionan adecuadamente las relaciones entre las diferentes alertas y notas.
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Servicios Web:</strong> Todas las opciones que se puedan realizar desde el interfaz web deberían poderse realizar mediante un API propio, el cual pueda ser usado desde aplicaciones externas o desde una aplicación web tipo SPI (Single Page Interfac) compilada para dispositivos móviles. Dicho API debe servir para poder realizar las tareas propias de cualquier tipo de usuario registrado en el portal, a excepción del usuario administrador del sistema.
+  </li>
+  <br/>
+  
+</ul>
+</div>
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Requerimientos para las partes privadas (Usuarios Normales, Usuarios Moderadores, Usuarios Patrocinadores, Usuarios Administradores):</div>
+<div style="text-align:justify;margin:0em">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** En general se tendrán funciones básicas de Alta, Modificación, Baja, Consulta, Búsquedas/Filtrado.
+<ul>
+  <li><strong>Mantenimiento de Usuarios: </strong>Crear usuarios bajo petición de patrocinio o para ser administradores (el resto serán usuarios que se registran ellos mismos), revisar los nuevos usuarios registrados automáticamente, bloquear usuarios por exceso de comentarios denunciados, desbloquear usuarios que han fallado el límite de intentos de acceso al sitio, ver el registro de fallos de acceso, eliminar registros antiguos de fallos de acceso, etc.
+  <br/>
+  *** En la gestión de usuarios colaboradores se deberá tener en cuenta la opción de moderador de zona y la zona o zonas asignadas, es decir, la relación de un usuario registrado con las zonas o ubicaciones que se permite gestionar o moderar. Las zonas son las propias ubicaciones (países, estados, provincias, poblaciones, zonas) en las que se desarrollarán las activades y eventos.
+  <br/>
+  *** En el detalle de la gestión de un usuario concreto, un administrador podrá ver la ficha con todas las opciones vinculadas con ese usuario, más o menos como se indica en el apartado &quot;Opciones de Usuarios Registrados&quot;.
+  <br/>
+  *** Los roles disponibles estarán predefinidos de entre los indicados arriba.</li>
+  <br/>
+  
+  <li><strong>Mantenimiento de Ubicaciones (o Áreas): </strong> Servirá a los administradores gestionar las áreas de influencia de las actividades y por tanto de los moderadores/administradores que tengan asignadas dichas áreas. En concreto se mantendrán desde esta sección, los <strong>Paises</strong>, posiblemente <strong>Estados</strong> dentro de un país, <strong>Provincias</strong> dentro de un estado, <strong>Poblaciones</strong> dentro de una provincia y <strong>Zonas</strong> dentro de una población.
+  <br/>
+  *** Los usuarios moderadores podrán estar asociados a diferentes áreas de influencia. Un área de influencia puede ser una zona, una población, una provincia, un estado, o un país, y dependiendo de las asignaciones del usuario, éste podrá moderar todas las actividades y alertas del conjunto o unión de las áreas asignadas.
+  </li>
+  <br/>
+  
+  <li><strong>Mantenimiento de Etiquetas o Clasificadores: </strong> Poder gestionar la lista de etiquetas que sirven para clasificar las actividades y eventos. No se debería eliminar una etiqueta que esté siendo usada por alguna actividad. Se debería poder unificar etiquetas que se consideren como duplicadas o sean muy parecidad en su texto, aunque esta decisión correrá a cargo de un administrador siendo el proceso de unificación el que sustituirá todos los registros de datos que usan una etiqueta por la buena.
+  <br/>
+  *** A la hora de crear actividades, un usuario podrá proponer etiquetas nuevas si de entre las existentes no son adecuadas para clasificar la actividad en cuestión. Con esto se deberá tener un control de revisión de etiquetas nuevas para que los moderadores o administradores puedan detectarlas, revisarlas y actuar en consecuencia. Lo más oportuno es que al crear una etiqueta nueva, se genere un aviso de notificación para los moderadores o admininstradores de la zona de influencia avisando de lo ocurrido.
+  </li>
+  <br/>
+  
+  <li><strong>Mantenimiento de Actividades: </strong> Un mantenimiento generalizado de las actividades y eventos a nivel administrador, en la que se podrán ver y gestionar todas las actividades, incluso dar de alta o baja según se considere oportuno. En cada ficha concreta se podrán ver los datos de la misma, tal y como se pueden gestionar desde un usuario normal, a excepción de algunas acciones que podrán realizarse de forma exclusiva por un administrador, como por ejemplo el bloqueo/desbloqueo de la actividad, etc.
+  <br/>
+  El mantenimiento de una actividad incluirá la posible configuración de la participación en la misma, la revisión y gestión de los usuarios que están siguiendola, los usuarios registrados como participantes, la revisión / gestión de los comentarios creados, las votaciones, las posibles alertas de esa actividad, etc.
+  </li>
+  <br/>
+  
+  <li><strong>Mantenimiento de Patrocinios / Anuncios: </strong>Crear los anuncios de patrocinio bajo petición de los usuarios patrocinadores, permitir revisar los nuevos introducidos por los usuarios patrocinadores, bloquear en caso de ser inapropiados, etc.
+  <br/>
+  *** Se deberá permitir realizar una gestión más o menos completa de los anuncios de patrocinio según la actividad, el posible área de influencia, las posibles etiquetas relacionadas, etc.
+  </li>
+  <br/>
+  
+  <li><strong>Mantenimiento de Registros (LOG): </strong> Mantenimiento y visualización de los registro de LOG que se generen en el sistema, con posibilidad de poder exportar los registros en archivo de texto o de eliminar los registros que cumplan un filtro establecido.
+  </li>
+  <br/>
+  
+  <li><strong>Utilidades: </strong>
+    <ul>
+      <li>Configuración de parametros del sistema.
+      </li>
+      <li>Copias de Seguridad y Restauración de los datos y archivos de imágenes de la aplicación.
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+</ul>
+</div>
+
+<hr/>
+<div class="titulo titulo3" style="margin:5mm;font-size:1.0em;font-weight:bold">Requisitos de Información / Datos:</div>
+<div style="text-align:justify;margin:0em">
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;*** Información y Datos que debe almacenar y manejar el sistema para proporcionar las funcionalidades indicadas en los requisitos.
+<ul>
+  <li><strong>Actividad: </strong>Elemento con &rarr; título, descripción, fecha celebración, 
+  duración estimada, Lugar de celebración, detalles, notas, url externa (dirección web opcional)
+  Imagen principal, [Imágenes adicionales,]  
+  Edad recomendada (o rango), 
+  Etiquetas, [Clasificación,] 
+  Estados de actividad,
+  Patrocinios de actividad,
+  Seguimientos,
+  Participación,
+  Valoración (contadores de votos),
+  Comentarios,
+  Registro de usuario,
+  notas administrador.
+  </li>
+  <br/>
+  
+  <li><strong>Lugar: </strong>Sustituto de &rarr; dirección, notas de cómo llegar, notas del lugar, Área.
+  </li>
+  <br/>
+  
+  <li><strong>Área: </strong>Alguna de las formas de tener ubicaciones relacionadas:
+  <br/>
+    <ul type="decimal">
+      <li>Sustituto de &rarr; código de clase de área, [País | Estado | Provincia | Poblacion | Zona | ...].
+      <br/>
+      *** Se deben fijar desde el diseño clases de datos relacionadas entre sí de forma jerarquizada. En esta opción, se deben &quot;identificar&quot; las diferentes clases por un código de clase (número o letra) para la implementación en la base de datos, como por ejemplo: 1=Pais, 2=Estado, 3=Provincia, 4=Poblacion, 5=Zona, ...
+      <ul>
+        <li><strong>País: </strong>nombre, código internacional de país, código idioma (si se considera útil para la identificación automática del idioma y localización)</li>
+        <li><strong>Estado: </strong>nombre, País. *** Considerar el Estado como Comunidad Autónoma, Región o similar.</li>
+        <li><strong>Provincia: </strong>nombre, Estado</li>
+        <li><strong>Población: </strong>nombre, Provincia</li>
+        <li><strong>Zona: </strong>nombre, Población</li>
+        <li>...</li>
+      </ul>
+      </li>
+      <li>Elemento con &rarr; código de clase de área (por ejemplo: 1=Pais, 2=Estado, 3=Provincia, 4=Poblacion, 5=Zona, ...), nombre, Área padre.
+      <br/>
+      *** Agrupar las posibles áreas en un conjunto en el que la jerarquía se realiza por auto-relaciones, y donde un elemento de clase N sólo puede estar relacionado con un elemento padre de clase <strong>&lt;N</strong>, o lo que es lo mismo, o N-1, o N-2, ..., o 1, o 0 (CERO).
+      <br/>
+      *** En este caso, los códigos de clase se pueden fijar desde un primer momento y tener la lista disponible desde código o como una enumeración en la base de datos.
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Imagen: </strong>Sustituto de &rarr; nombre(identificador) de archivo externo en carpeta predefinida (ruta escribible por el servidor web) o campo binario con la imagen subida.
+  </li>
+  <br/>
+  
+  <li><strong>Imágenes: </strong>Elemento con &rarr; Imagen, Actividad. *** Relaciona una imagen con una actividad con lo que se pueden tener múltiples imágenes por actividad.
+  </li>
+  <br/>
+  
+  <li><strong>Edad: </strong>Sustituto de una clasificación predefinida de rango de edades, por ejemplo: 0=Todas las edades, 1=Bebé (0 a 3 años), 2=Infantil (4 a 9), 3=Alevín (10 a 14), 3=Juvenil (15 a 17), 4=Adulto Joven (18-25), 5=Adulto Medio (26-35), 6=Adulto Mayor (36-65), 7=Tercera Edad (>66).
+  <br/>
+  *** En este caso, los códigos de rangos de edad se pueden fijar desde un primer momento y tener la lista disponible desde código o como una enumeración en la base de datos.
+  </li>
+  <br/>
+  
+  <li><strong>Etiquetas de Actividad: </strong>Sustituto de relación que vincula una etiqueta con una actividad, puede ser una de la opciones:
+    <ul type="decimal">
+      <li>Elemento con &rarr; Etiqueta, Actividad. *** Relaciona ambas clases de objeto. En este caso debe definirse:
+        <ul>
+          <li><strong>Etiqueta: </strong>Elemento con &rarr; nombre. 
+          *** Un conjunto de palabras clave utilizadas para identificar y clasificar de diferentes maneras las actividades.
+          </li>
+        </ul>
+      </li>
+      <li>Sustituto de &rarr; etiquetas_id. *** Una lista de identificadores de Etiqueta con los que se relaciona la actividad.
+      </li>
+      <li>Sustituto de &rarr; etiquetas_nombre. *** Una lista de datos &quot;nombre&quot; de las propias etiquetas con las que se relaciona la actividad.
+      </li>
+    </ul>
+    *** En el caso de usar listas serían cadenas de datos separados por comas, teniendo especial cuidado en que la coma no aparezca en el propio contenido de los datos.
+    <br/>
+    *** Para gestionar adecuadamente las etiquetas de nueva creación propuestas por los usuarios, se generará una alerta para los moderadores o administradores que indique la etiqueta creada, la fecha/hora del momento y el usuario que lo ha realizado para que tengan constancia de ello y se pueda revisar / actuar en consecuencia.
+  </li>
+  <br/>
+  
+  <li><strong>Clasificación: </strong>Posible sustituto de relación con un elemento de un conjunto jerarquizado de agrupación/clasificación de etiquetas elaborado por la administración del portal. Sería un elemento con &rarr; nombre, descripción. Para identificar la propia clasificación y posteriormente incluir en ella las etiquetas de forma jerarqizada:
+    <ul>
+      <li><strong>Etiquetas de Clasificación: </strong>Elemento de relación entre una Clasificación y una serie de etiquetas, con &rarr; Clasificación, Etiqueta, Etiqueta de Clasificación Padre.
+      </li>
+    </ul>
+  *** En un principio la funcionalidad para estos elementos no se van a implementar por ahora, aunque no sería demasiado complejo.
+  </li>
+  <br/>
+
+  <li><strong>Estados de Actividad: </strong>Sustituto de &rarr; pública (lógico), visible (lógico), terminada (0:No, 1:Realizada, 2:Suspendida, 3:Cancelada por inadecuada), fecha/hora de terminación, motivo de terminación, número denuncias, fecha/hora de la primera denuncia, bloqueada, fecha/hora del bloqueo, motivo del bloqueo.
+  </li>
+  <br/>
+  
+  <li><strong>Patrocinios de actividad: </strong>Sustituto de relación que vincula una actividad con uno o varios anuncios de patrocinio. 
+  Es un elemento con &rarr; Actividad, Anuncio.
+  <br/>
+  *** Por ahora no se va a implementar, pero ver la información del elemento &quot;Anuncio&quot;.
+  </li>
+  <br/>
+  
+  <li><strong>Seguimientos: </strong>Sustituto de relación que vincula una actividad con un usuario que desea estar al tanto de los avisos y notificaciones de la misma. Es un elemento con &rarr; fecha/hora de seguimiento, Actividad, Usuario seguidor.
+  </li>
+  <br/>
+  
+  <li><strong>Participación: </strong>Sustituto de &rarr; 
+  máximo (si está abierta la participación y el número máximo de participantes que pueden apuntarse en la actividad, 0:No se admiten participantes, &gt;0:Ese valor límite, -1:No hay límite máximo), 
+  mínimo (número de participantes apuntados para que la actividad se lleve a cabo, &gt;=0:Ese valor mínimo, -1:No hay mínimo),
+  reserva (valor lógico para indicar si se admiten o no participantes en reserva en caso de que esté abierta la participación),
+  [Formulario de Participación,] Participantes.
+    <ul>
+      <li><strong>Formulario de Participación: </strong>Es un bloque de información con la configuración de los campos de datos requeridos para el formulario de registro de participación en la actividad. Se establecerá la lista de campos a solicitar al usuario que desee registrar su participación.
+      <br/>
+      *** Como por ahora no se va a implementar, este dato de almacenará como valor NULO, indicando que no hay formulario de participación, sólo el registro mínimo de participantes.
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Participantes: </strong>Sustituto de relación que vincula una actividad con un participante (usuario) y sus datos de participación. Es un elemento con &rarr; fecha/hora (de registro de participación), Actividad, Usuario, [Datos de Participación,] Cancelación de la participación.
+    <ul>
+      <li><strong>Datos de Participación: </strong>Es el bloque de información con los datos requeridos en el formulario de participación de la actividad. Se almacenará la lista de valores de los campos configurados en el formulario de participación.
+      <br/>
+      *** Como por ahora no se va a implementar el &quot;Formulario de Participación&quot;, este dato de almacenará como valor NULO, indicando que no hay datos adicionales de participación.
+      </li>
+      <li><strong>Cancelación de la participación: </strong>Sustituto de &rarr; fecha/hora de cancelación, motivo de la cancelación.
+      <br/>
+      *** Si se permite la reserva, los participantes apuntados obtendrán plaza en caso de anulación de alguno de los anteriores, siguiéndose el orden de registro de participación (fecha/hora e identificador único).
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Valoración: </strong>Sustituto de una de estas opciones:
+  <br/>
+    <ul type="decimal">
+      <li>suma_notas, total_notas. *** Si se desea una valoración media por nota en un rango de valores posibles [0..N] sin necesidad de almacenar los votos independientes.</li>
+      <li>votos1, votos2, ..., votosN[, votosTotal]. *** Si se permiten N opiniones diferentes en la valoración y se desea almacenar la cuenta de votos independientes. Aquí se puede tener &quot;votosTotal&quot; como el acumulado de los N campos de votos para agilizar los cálculos en caso de necesidad.</li>
+      <li>votosOk, votosKo. *** Una versión reducida del anterior para tener una valoración de tipo &quot;a favor&quot; o &quot;en contra&quot; en la que sólo interesa los &quot;me gusta&quot; y &quot;no me gusta&quot; como valoración la actividad.</li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Comentarios: </strong>Sustituto de relación que vincula una actividad con una serie de comentarios realizados por los usuarios del sistema. Es un elemento con &rarr; Actividad, Comentario.
+  </li>  
+  <br/>
+
+  <li><strong>Comentario: </strong>Sustituto de &rarr;
+  Registro de usuario, texto, Comentario padre, cerrado (lógico), número denuncias, fecha/hora de la primera denuncia, bloqueado, fecha/hora del bloqueo, motivo del bloqueo. 
+  </li>  
+  <br/>
+  
+  <li><strong>Registro de usuario: </strong>Sustituto de &rarr; 
+    fecha/hora de creación, Usuario creador, fecha/hora de modificación, Usuario modificador.
+    <br/>
+    *** Sirve tanto para relacionar algún elemento de información con los usuarios que lo han creado y/o modificado, como para conocer el momento de cuando lo han realizado.
+  </li>
+  <br/>
+
+  <li><strong>Usuario: </strong>Elemento con &rarr; email, password, nick, nombre, apellidos, fecha_nacimiento, dirección (opcional), Área de localización (se recomienda obligatoria), rol (N:Normal, M:Moderador, P:Patrocinador, A:Administrador), Opciones de Aviso, fecha/hora de registro, registro confirmado, ultimo acceso, intentos acceso, bloqueado, fecha/hora del bloqueo, motivo del bloqueo, [Valoración usuario,] Áreas de moderación, Seguimientos, Participación, Comentarios, Avisos.
+    <ul>
+      <li><strong>Opciones de Aviso: </strong>Sustituto de &rarr; recibir correo (lógico), recepción agrupada (lógico), marcar leídos como borrados (0:No marcar, >0:tiempo en días), eliminar borrados tras un tiempo(>=1 día y <=1 año, o como se considere oportuno).
+      <br/>
+      *** Si el usuario desea recibir correos con los avisos que se generan en el sistema para él. Puede indicar si desea recibir un correo por aviso (no agrupados), o recibir un correo con los avisos agrupados en un período de tiempo preestablecido (configurado en el sistema) de por ejemplo 1 día.
+      <br/>
+      *** Si el usuario desea que los avisos marcados como leídos se marquen como borrados de forma automática transcurrido un tiempo establecido (configurado en el dato), debe activar este indicador con un valor positivo dado en dias. 
+      <br/>
+      *** Si el usuario desea que los avisos marcados como borrados se eliminen definitivamente de forma automática transcurrido un tiempo establecido (configurado en el dato), debe activar este indicador con un valor positivo dado en dias. 
+      </li>
+      <li><strong>Valoración usuario: </strong>Sustituto de una de las opciones de &rarr; Valoración.
+      <br/>
+      *** Esta información es opcional, y por ahora no se incluye en la base de datos inicial.
+      </li>
+      <li><strong>Áreas de moderación: </strong>Sustituto de relación que vincula un usuario con un área de influencia para actuar como moderador dentro de ella. Se utiliza a la hora de aplicar/validar los permisos de acceso a las opciones de moderación por áreas. Es un elemento con &rarr; Usuario, Área.
+      <li><strong>Seguimientos, Participación, Comentarios: </strong>Tablas relacionadas ya comentadas por su relación con las Actividades.
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Avisos / Notificaciones: </strong>Elemento con &rarr; fecha/hora, código de clase de aviso (A:Aviso, N:Notificación, D:Denuncia, C:Consulta), texto,
+  Usuario destino (NULO si es para un moderador o administrador y no se conoce su usuario o aún no ha sido aceptado el aviso por uno de ellos),
+  Usuario origen (NULO si es generado por el sistema),
+  Actividad (NULO si no está relacionado con una actividad),
+  Comentario (NULO si no está relacionado con un comentario),
+  fecha/hora de lectura (NULO si no se ha leído o se ha desmarcado como leído),
+  fecha/hora de borrado (NULO si no se ha borrado),
+  fecha/hora de aceptación (NULO si no se ha aceptado para su gestión por un moderador o administrador, no usado en otros usuarios).
+  <br/>
+  *** Un aviso pasa a estar &quot;leído&quot; si el usuario destino lo abre estando a NULO la fecha/hora de lectura. Si el usuario lo desea puede cambiarlo a &quot;no leído&quot;; en este caso se establace a NULO el dato.
+  <br/>
+  *** Un aviso pasa a estar &quot;borrado&quot; si el usuario destino lo marca como tal, o tiene configurado el marcado automático de los avisos leídos. No podrá pasar a borrado si el aviso no está aceptado en caso de ser para un moderador o administrador. En este estado el aviso se eliminará definitivamente del sistema transcurrido el tiempo determinado por el usuario desde su borrado.
+  <br/>
+  *** Un aviso pasa a estar &quot;aceptado&quot; si el usuario destino es un moderador o administrador que lo marca para gestionarlo. En el caso de que el usuario destino sea NULO, cualquier moderador o administrador de la zona de influencia del aviso podrá aceptarlo, momento en el que se completará el dato con el usuario que lo ha aceptado. Si un aviso no ha sido aceptado, no podrá ser marcado como borrado.
+  </li>
+  <br/>
+
+  <li><strong>Anuncios: </strong>Elemento con &rarr; título, texto, Imagen, Etiquetas de Anuncio, Registro de usuario.
+    <ul>
+      <li><strong>Etiquetas de Anuncio: </strong>Sustituto de relación que vincula una etiqueta con un anuncio, puede ser una de la opciones:
+        <ul type="decimal">
+          <li>Elemento con &rarr; Etiqueta, Anuncio. *** Relaciona ambas clases de objeto. En este caso como para las etiquetas de actividades, debe definirse:
+            <ul>
+              <li><strong>Etiqueta: </strong>Elemento con &rarr; nombre. 
+              *** Un conjunto de palabras clave utilizadas para identificar y clasificar de diferentes maneras las actividades de las que se hacen/patrocinan anuncios.
+              </li>
+            </ul>
+          </li>
+          <li>Sustituto de &rarr; etiquetas_id. *** Una lista de identificadores de Etiqueta con los que se relaciona el anuncio.
+          </li>
+          <li>Sustituto de &rarr; etiquetas_nombre. *** Una lista de datos &quot;nombre&quot; de las propias etiquetas con las que se relaciona el anuncio.
+          </li>
+        </ul>
+        *** En el caso de usar listas serían cadenas de datos separados por comas, teniendo especial cuidado en que la coma no aparezca en el propio contenido de los datos.
+        <br/>
+        *** Para gestionar adecuadamente las etiquetas de nueva creación propuestas por los usuarios, se generará una alerta para los moderadores o administradores que indique la etiqueta creada, la fecha/hora del momento y el usuario que lo ha realizado para que tengan constancia de ello y se pueda revisar / actuar en consecuencia.
+      </li>
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Configuraciones: </strong>Será un elemento con &rarr; variable, valor. Concretamente un conjunto de información que servirá para establecer datos más o menos fijos (invariables en el tiempo) que se utilizan en la aplicación durante su ejecución. Por ejemplo...
+    <ul type="disc">
+      <li><strong>numero_actividades_portada:</strong> el número máximo de actividades más relevantes para los bloques de la página principal, </li>
+      <li><strong>numero_lineas_pagina:</strong> el número máximo de líneas por página de datos en las diferentes gestiones, </li>
+      <li><strong>numero_denuncias_actividad:</strong> el número mínimo de denuncias para una actividad antes de ser bloqueada, </li>
+      <li><strong>numero_denuncias_comentario:</strong> el número mínimo de denuncias para un comentario antes de ser bloqueado, </li>
+      <li><strong>numero_intentos_usuario:</strong> el número mínimo de intentos de acceso de un usuario antes de ser bloqueado, </li>
+      <li><strong>tiempo_agrupar_avisos:</strong> el intervalo de tiempo en horas que debe transcurrir para agrupar los avisos de un usuario y enviarlos por correo (si lo tiene así activado), </li>
+      <li><strong>tiempo_borrar_avisos_leidos:</strong> el tiempo en días que debe transcurrir para que los avisos marcados como leídos se marquen como borrados de forma automática, </li>
+      <li><strong>tiempo_eliminar_avisos_borrados:</strong> el tiempo en días que debe transcurrir para que los avisos marcados como borrados se eliminen definitivamente de forma automática, </li>
+      <li>... </li>
+      
+    </ul>
+  </li>
+  <br/>
+  
+  <li><strong>Logs: </strong>Elemento con &rarr; fecha/hora, clase del nivel de log (E:Error, A:Aviso, I:Información, D:Depuración), modulo aplicación, texto.
+  </li>
+  <br/>
+  
+</ul>
+</div>
+  
+</div>
+
+</body>
+</html>
