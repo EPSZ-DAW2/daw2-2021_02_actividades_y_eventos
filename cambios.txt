@@ -1,0 +1,4 @@
+CREADO:
+- basic\models\Usuarios.php
+- basic\models\UsuariosQuery.php
+- views\site\signin.php

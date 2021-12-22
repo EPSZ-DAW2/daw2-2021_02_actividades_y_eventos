@@ -2,7 +2,7 @@
 
 return [
     'class' => 'yii\db\Connection',
-    'dsn' => 'mysql:host=localhost;dbname=daw2_2021-22_02_actividades_y_eventos',
+    'dsn' => 'mysql:host=localhost;dbname=daw2_actividades',
     'username' => 'root',
     'password' => '',
     'charset' => 'utf8',
