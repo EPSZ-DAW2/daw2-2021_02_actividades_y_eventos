@@ -1,21 +1,33 @@
 <?php
 
 use yii\helpers\Html;
-use yii\widgets\ActiveForm;
+use yii\bootstrap5\ActiveForm;
+use app\models\Usuarios;
+
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 /* @var $form ActiveForm */
+$this->title='Sign in';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signin">
-
-    <?php $form = ActiveForm::begin(); ?>
+<h1><?= Html::encode($this->title) ?></h1>
+    <?php $form = ActiveForm::begin([
+        'id' => 'login-form',
+        'layout' => 'horizontal',
+        'fieldConfig' => [
+            'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
+            'labelOptions' => ['class' => 'col-lg-1 col-form-label'],
+        ],
+        ]); ?>
 
         <?= $form->field($model, 'email') ?>
         <?= $form->field($model, 'password') ?>
         <?= $form->field($model, 'nick') ?>
         <?= $form->field($model, 'nombre') ?>
         <?= $form->field($model, 'apellidos') ?>
+        <?php //$model->rol="N"; ?>
         <?= $form->field($model, 'rol') ?>
         <?= $form->field($model, 'confirmado') ?>
         <?= $form->field($model, 'fecha_nacimiento') ?>
@@ -31,7 +43,6 @@ use yii\widgets\ActiveForm;
         <?= $form->field($model, 'avisos_eliminar_borrados') ?>
         <?= $form->field($model, 'num_accesos') ?>
         <?= $form->field($model, 'bloqueado') ?>
-    
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>

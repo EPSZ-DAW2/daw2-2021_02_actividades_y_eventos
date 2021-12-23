@@ -67,7 +67,7 @@ class Usuarios extends \yii\db\ActiveRecord
     {
         return [
             'id' => 'ID',
-            'email' => 'Correo Electronico y \"login\" del usuario.',
+            'email' => 'Correo Electronico',
             'password' => 'Password',
             'nick' => 'Nick',
             'nombre' => 'Nombre',

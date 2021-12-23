@@ -2,3 +2,6 @@ CREADO:
 - basic\models\Usuarios.php
 - basic\models\UsuariosQuery.php
 - views\site\signin.php
+
+23/12/2021
+- mirar como hacer para que el rol y los demas elementos no aparezcan en el formulario y se pongan solos

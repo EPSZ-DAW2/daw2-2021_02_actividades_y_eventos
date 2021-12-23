@@ -131,13 +131,30 @@ class SiteController extends Controller
     /*NUEVAS*/
     public function actionSignin()
     {
-        $model = new \app\models\Usuarios();
+        $model = new Usuarios();
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->validate()) {
                 // form inputs are valid, do something here
-                Yii::$app->session->setFlash('signinFormSubmitted');
-                return $this->refresh();
+                $model->email= $_POST['Usuarios']['email'];
+                $model->password= $_POST['Usuarios']['password'];
+                $model->nick= $_POST['Usuarios']['nick'];
+                $model->nombre= $_POST['Usuarios']['nombre'];
+                $model->apellidos= $_POST['Usuarios']['apellidos'];
+                $model->rol= "N";
+                $model->confirmado= 1;
+                
+                if ($model->save()) 
+                {
+                   return $this->redirect(['login']);
+                }
+                else {
+                    return $this->redirect(['about']);
+                }
+            }
+            else {
+                return $this->redirect(['index']);
+               // $errors = $model->errors;
             }
         }
 
