@@ -8,7 +8,7 @@ use app\models\Usuarios;
 /* @var $this yii\web\View */
 /* @var $model app\models\Usuarios */
 /* @var $form ActiveForm */
-$this->title='Sign in';
+$this->title='Registro';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="site-signin">
@@ -18,31 +18,34 @@ $this->params['breadcrumbs'][] = $this->title;
         'layout' => 'horizontal',
         'fieldConfig' => [
             'template' => "{label}\n<div class=\"col-lg-3\">{input}</div>\n<div class=\"col-lg-8\">{error}</div>",
-            'labelOptions' => ['class' => 'col-lg-1 col-form-label'],
+            'labelOptions' => ['class' => 'col-lg-2 col-form-label'],
         ],
         ]); ?>
-
+        <?= $form->field($model, 'fecha_registro')->hiddenInput(['value'=>date('Y-m-d H:i:s')])->label(false); ?>
+        <?= $form->field($model, 'fecha_acceso')->hiddenInput(['value'=>date('Y-m-d H:i:s')])->label(false); ?>
+        <?= $form->field($model, 'notas_bloqueo')->hiddenInput(['value'=>NULL])->label(false); ?>
+        <?= $form->field($model, 'fecha_bloqueo')->hiddenInput(['value'=>NULL])->label(false); ?>
+        <?= $form->field($model, 'nick')->textInput(['autofocus' => true]) ?>
+        <?= $form->field($model, 'password')->passwordInput() ?>
         <?= $form->field($model, 'email') ?>
-        <?= $form->field($model, 'password') ?>
-        <?= $form->field($model, 'nick') ?>
         <?= $form->field($model, 'nombre') ?>
         <?= $form->field($model, 'apellidos') ?>
-        <?php //$model->rol="N"; ?>
-        <?= $form->field($model, 'rol') ?>
-        <?= $form->field($model, 'confirmado') ?>
+        <?php //en el formulario del rol se le pone la N por defecto y se oculta ?>
         <?= $form->field($model, 'fecha_nacimiento') ?>
-        <?= $form->field($model, 'fecha_registro') ?>
-        <?= $form->field($model, 'fecha_acceso') ?>
-        <?= $form->field($model, 'fecha_bloqueo') ?>
-        <?= $form->field($model, 'direccion') ?>
-        <?= $form->field($model, 'notas_bloqueo') ?>
+        <?php //se puede usar el date asi?? ?>
+        <?= $form->field($model, 'direccion') ?>      
         <?= $form->field($model, 'area_id') ?>
-        <?= $form->field($model, 'avisos_por_correo') ?>
-        <?= $form->field($model, 'avisos_agrupados') ?>
-        <?= $form->field($model, 'avisos_marcar_leidos') ?>
-        <?= $form->field($model, 'avisos_eliminar_borrados') ?>
-        <?= $form->field($model, 'num_accesos') ?>
-        <?= $form->field($model, 'bloqueado') ?>
+        <?= $form->field($model, 'num_accesos')->hiddenInput(['value'=>0])->label(false); ?>
+        <?= $form->field($model, 'bloqueado')->hiddenInput(['value'=>0])->label(false); ?>
+        <?= $form->field($model, 'rol')->hiddenInput(['value'=> "N"])->label(false); ?>
+        <?= $form->field($model, 'confirmado')->hiddenInput(['value'=> 1])->label(false); ?>
+
+        <?= $form->field($model, 'avisos_por_correo')->checkbox() ?>
+        <?= $form->field($model, 'avisos_agrupados')->checkbox() ?>
+        <?= $form->field($model, 'avisos_marcar_leidos')->checkbox() ?>
+        <?= $form->field($model, 'avisos_eliminar_borrados')->checkbox() ?>
+        
+        
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>

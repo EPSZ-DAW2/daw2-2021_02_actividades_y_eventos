@@ -141,8 +141,24 @@ class SiteController extends Controller
                 $model->nick= $_POST['Usuarios']['nick'];
                 $model->nombre= $_POST['Usuarios']['nombre'];
                 $model->apellidos= $_POST['Usuarios']['apellidos'];
-                $model->rol= "N";
-                $model->confirmado= 1;
+                $model->rol= $_POST['Usuarios']['rol'];
+                $model->confirmado=$_POST['Usuarios']['confirmado'];
+                $model->fecha_nacimiento=$_POST['Usuarios']['fecha_nacimiento'];
+                $model->fecha_registro=$_POST['Usuarios']['fecha_registro'];
+                $model->fecha_acceso=$_POST['Usuarios']['fecha_acceso'];
+                $model->fecha_bloqueo=$_POST['Usuarios']['fecha_bloqueo'];
+                $model->direccion=$_POST['Usuarios']['direccion'];
+                $model->notas_bloqueo=$_POST['Usuarios']['notas_bloqueo'];
+                if (empty($model->area_id=$_POST['Usuarios']['area_id'])) 
+                {
+                    $model->area_id=0;
+                } 
+                $model->avisos_por_correo=$_POST['Usuarios']['avisos_por_correo'];
+                $model->avisos_agrupados=$_POST['Usuarios']['avisos_agrupados'];
+                $model->avisos_marcar_leidos=$_POST['Usuarios']['avisos_marcar_leidos'];
+                $model->avisos_eliminar_borrados=$_POST['Usuarios']['avisos_eliminar_borrados'];
+                $model->num_accesos=$_POST['Usuarios']['num_accesos'];
+                $model->bloqueado=$_POST['Usuarios']['bloqueado'];
                 
                 if ($model->save()) 
                 {
@@ -154,7 +170,7 @@ class SiteController extends Controller
             }
             else {
                 return $this->redirect(['index']);
-               // $errors = $model->errors;
+                //hacer pagina que diga que te has registrado mal
             }
         }
 
