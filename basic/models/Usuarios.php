@@ -32,6 +32,9 @@ use \yii\db\ActiveRecord;
  */
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
+    public $username;
+    public $password;
+
     /**
      * {@inheritdoc}
      */
@@ -108,12 +111,13 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
 
     public static function findIdentityByAccessToken($token, $type=null)
     {
-        return self::findOne(['accessToken'=>$token]);
+        //No se va a usar en la aplicación.
+        return null;
     }
 
-    public static function findByUsername($nick)
+    public static function findByUsername($username)
     {
-        return self::findOne(['nick'=>$nick]);
+        return self::findOne(['nick'=>$username]);
     }
 
     public function getId()
@@ -123,16 +127,19 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     
     public function getAuthKey()
     {
-        return $this->authKey;
+      //return md5( sprintf( 'AK:a=%s,b=%s', $this->id, __LINE__));
+      return md5( sprintf( 'AK:id=%s', $this->id));
     }
 
-    public function validateAuthKey($authKey)
+    public function validateAuthKey( $authKey)
     {
-        return $this->authKey === $authKey;
+        //Al simular el "authkey" se debe usar siempre el método para obtenerla.
+        return $this->getAuthKey() === $authKey;
     }
 
     public function validatePassword($password)
     {
-        return password_verify($password, $this->password);
+        return $this->password; 
+        //return password_verify($password, $this->password);
     }
 }

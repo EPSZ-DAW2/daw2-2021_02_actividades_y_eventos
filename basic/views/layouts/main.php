@@ -45,7 +45,7 @@ $navItems=[
   if (Yii::$app->user->isGuest) {
     array_push($navItems,['label' => 'Sign In', 'url' => ['/site/signin']],['label' => 'Login', 'url' => ['/site/login']]);
   } else {
-    array_push($navItems,['label' => 'Logout (' . Yii::$app->user->identity->username . ')',
+    array_push($navItems,['label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
         'url' => ['/site/logout'],
         'linkOptions' => ['data-method' => 'post']]
     );
