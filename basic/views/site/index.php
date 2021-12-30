@@ -1,3 +1,12 @@
+<html>
+
+<head>
+
+<script type="text/javascript" src="https://cdn3.professor-falken.com/recursos/js/snowstorm.js"></script>
+
+</head>
+</html>
+
 <?php
 
 /* @var $this yii\web\View */
