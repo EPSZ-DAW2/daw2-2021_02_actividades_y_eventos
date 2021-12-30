@@ -3,8 +3,8 @@
 namespace app\models;
 
 use Yii;
-use \yii\web\IdentityInterface;
-use \yii\db\ActiveRecord;
+//use \yii\web\IdentityInterface;
+//use \yii\db\ActiveRecord;
 /**
  * This is the model class for table "usuarios".
  *
@@ -32,9 +32,6 @@ use \yii\db\ActiveRecord;
  */
 class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterface
 {
-    public $username;
-    public $password;
-
     /**
      * {@inheritdoc}
      */
@@ -103,6 +100,10 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return new UsuariosQuery(get_called_class());
     }
 
+
+
+
+
     public static function findIdentity($id)
     {
         return self::findOne($id);
@@ -111,7 +112,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
 
     public static function findIdentityByAccessToken($token, $type=null)
     {
-        //No se va a usar en la aplicación.
         return null;
     }
 
@@ -120,26 +120,30 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return self::findOne(['nick'=>$username]);
     }
 
+
+
+
+
+
     public function getId()
     {
         return $this->id;
     }
-    
+
     public function getAuthKey()
     {
-      //return md5( sprintf( 'AK:a=%s,b=%s', $this->id, __LINE__));
+      //return md5( sprintf( 'AK:a=%s,b=%s', $this->id, LINE));
       return md5( sprintf( 'AK:id=%s', $this->id));
     }
 
-    public function validateAuthKey( $authKey)
+    public function validateAuthKey($authKey)
     {
-        //Al simular el "authkey" se debe usar siempre el método para obtenerla.
-        return $this->getAuthKey() === $authKey;
+        return $this->authKey === $authKey;
     }
 
     public function validatePassword($password)
     {
-        return $this->password; 
+        return $password;
         //return password_verify($password, $this->password);
     }
 }
