@@ -133,40 +133,18 @@ class SiteController extends Controller
     {
         $model = new Usuarios();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                // form inputs are valid, do something here
-                /*
-                $model->email= $_POST['Usuarios']['email'];
-                $model->password= $_POST['Usuarios']['password'];
-                $model->nick= $_POST['Usuarios']['nick'];
-                $model->nombre= $_POST['Usuarios']['nombre'];
-                $model->apellidos= $_POST['Usuarios']['apellidos'];
-                $model->rol= $_POST['Usuarios']['rol'];
-                $model->confirmado=$_POST['Usuarios']['confirmado'];
-                $model->fecha_nacimiento=$_POST['Usuarios']['fecha_nacimiento'];
-                $model->fecha_registro=$_POST['Usuarios']['fecha_registro'];
-                $model->fecha_acceso=$_POST['Usuarios']['fecha_acceso'];
-                $model->fecha_bloqueo=$_POST['Usuarios']['fecha_bloqueo'];
-                $model->direccion=$_POST['Usuarios']['direccion'];
-                $model->notas_bloqueo=$_POST['Usuarios']['notas_bloqueo'];
-                */
+        if ($model->load(Yii::$app->request->post())) 
+        {
+            if ($model->validate()) 
+            {
                 if (empty($model->area_id)) 
                 {
                     $model->area_id=0;
                 }
-                /*
-                $model->avisos_por_correo=$_POST['Usuarios']['avisos_por_correo'];
-                $model->avisos_agrupados=$_POST['Usuarios']['avisos_agrupados'];
-                $model->avisos_marcar_leidos=$_POST['Usuarios']['avisos_marcar_leidos'];
-                $model->avisos_eliminar_borrados=$_POST['Usuarios']['avisos_eliminar_borrados'];
-                $model->num_accesos=$_POST['Usuarios']['num_accesos'];
-                $model->bloqueado=$_POST['Usuarios']['bloqueado'];
-                */
                 
                 if ($model->save()) 
                 {
-                   return $this->redirect(['login']);
+                   return $this->redirect(['confirmar']);
                 }
                 else {
                     return $this->redirect(['about']);
@@ -182,4 +160,25 @@ class SiteController extends Controller
             'model' => $model,
         ]);
     }
+
+    public function actionConfirmar()
+    {
+        $model = new \app\models\confirmarForm();
+
+        if ($model->load(Yii::$app->request->post())) {
+            if ($model->validate()) {
+                // form inputs are valid, do something here
+                return $this->redirect(['index']);
+            }
+            else 
+            {
+                return $this->redirect(['about']);
+            }
+        }
+
+        return $this->render('confirmar', [
+            'model' => $model,
+        ]);
+    }
 }
+?>

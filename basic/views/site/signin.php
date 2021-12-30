@@ -31,14 +31,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?= $form->field($model, 'nombre') ?>
         <?= $form->field($model, 'apellidos') ?>
         <?php //en el formulario del rol se le pone la N por defecto y se oculta ?>
-        <?= $form->field($model, 'fecha_nacimiento') ?>
+        <?= $form->field($model, 'fecha_nacimiento')->textInput(['placeholder' => "YYYY-MM-DD"]);?>
         <?php //se puede usar el date asi?? ?>
         <?= $form->field($model, 'direccion') ?>      
         <?= $form->field($model, 'area_id') ?>
         <?= $form->field($model, 'num_accesos')->hiddenInput(['value'=>0])->label(false); ?>
         <?= $form->field($model, 'bloqueado')->hiddenInput(['value'=>0])->label(false); ?>
         <?= $form->field($model, 'rol')->hiddenInput(['value'=> "N"])->label(false); ?>
-        <?= $form->field($model, 'confirmado')->hiddenInput(['value'=> 1])->label(false); ?>
+        <?= $form->field($model, 'confirmado')->hiddenInput(['value'=> 0])->label(false); ?>
 
         <?= $form->field($model, 'avisos_por_correo')->checkbox() ?>
         <?= $form->field($model, 'avisos_agrupados')->checkbox() ?>
