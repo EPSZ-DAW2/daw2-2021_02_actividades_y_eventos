@@ -11,10 +11,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-        
         <?= $form->field($model, 'confirmado')->checkbox() ?>
-
-    
+        
         <div class="form-group">
             <?= Html::submitButton('Submit', ['class' => 'btn btn-primary']) ?>
         </div>

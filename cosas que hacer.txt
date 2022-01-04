@@ -1,0 +1,54 @@
+** En estas tareas tenéis la parte "privada" desde el punto de vista de
+un administrador de la aplicación de hacer el mantenimiento de usuarios,
+es decir, mantener la tabla correspondiente para tener los diferentes
+usuarios activos y sobre todo el modelo de "Usuario" que servirá tanto
+para llevar ese mantenimiento como para poder acceder a la aplicación al
+hacer "login" (mirar la parte de "IdentityUser" para ello)... Por otra
+parte, para saber qué permisos tendrá el usuario que acceda a la
+aplicación debe tener un "rol" y para hacer la gestión bien, se debe
+tener la lista de roles predefinida, primero con constantes dentro de la
+clase de Usuario que hagáis que definan cada código de rol y con ellas
+tener un método que devuelva la lista de "rol" => "descripción", siendo
+"rol" la constante con el código del rol y "descripción" el nombre del
+rol si es diferente de su código.
+
+- El mantenimiento de la configuración es más de lo mismo, pero además
+de eso, recomiendo que donde se necesite usar en la aplicación una
+variable de configuración, se llame a un método estático del modelo de
+configuración para que la devuelva, y así no tener que repetir código de
+acceso a la base de datos en múltiples lugares. Por eso yo tendría en el
+modelo de configuración métodos estáticos tipo "getXXXXX()" para obtener
+cada variable de configuración de la base de datos... Y luego informar a
+los compañeros de trabajo cómo deben utilizar esos métodos.
+
+- Lo de los Logs serían mensajes que la aplicación genera (que no son
+los de depuración de Yii2) para que un administrador o los mismos
+usuarios tengan mensajes de aviso de lo que ha ocurrido o está
+ocurriendo en el sistema. Y por eso haría falta definir la lista de
+códigos de mensajes de Log, la idea es similar a los roles.
+
+- Las copias de seguridad se refiere a tener una sección donde un
+administrador pueda hacer copias de todos los datos que maneja el
+sistema, tanto lo que hay en la base de datos como en ficheros que
+puedan subirse y estar relacionados con la base de datos. Se debe tener
+en cuenta que también se pueden recuperar esos datos en algún momento,
+así que se necesita que la copia sea recuperable perfectamente. Y si se
+permite hacer más de una copia de seguridad, descargarla para guardarla
+en el PC local, o subirla para restaurarla después... ¡¡mucho mejor!!
+
+*** En la parte publica de la aplicación tenéis que hacer (más bien
+adaptar) la acción de login, el modelo y formulario de Login y todo lo
+que lleve alrededor. También debéis crear las acciones para el Registro
+automático de usuarios, con lo que hará falta un formulario de registro
+o similar, y tras el registro el envío de correo para que haga la
+confirmación o una vista que simule que el usuario hace la confirmación
+de que es correcto para que a partir de entonces pueda acceder a la
+aplicación.
+
+- Y la pieza con la lista de Actividades con "ficha resumida" es una
+vista que sólo se debe preocupar de mostrar un diseño resumido de lo que
+contiene el modelo de "Actividad" que reciba como dato. Con eso
+informáis a los compañeros de cómo se llama la vista para que los que la
+necesiten la usen... Se usará en vistas donde se saquen más de una
+actividad como resultado a modo de resumen, con lo que deberán usar
+vuestra vista.

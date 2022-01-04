@@ -10,6 +10,7 @@ use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
 use app\models\Usuarios;
+use yii\helpers\Html;
 
 class SiteController extends Controller
 {
@@ -70,16 +71,20 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin()
+    public function actionLogin() //FALTA COMPROBAR SI ESTA CONFIRMADO
     {
         if (!Yii::$app->user->isGuest) {
             return $this->goHome();
         }
 
         $model = new LoginForm();
-        if ($model->load(Yii::$app->request->post()) && $model->login()) {
+
+        if ($model->load(Yii::$app->request->post()) && $model->login() ) 
+        {
             return $this->goBack();
         }
+
+        
 
         $model->password = '';
         return $this->render('login', [
@@ -144,9 +149,12 @@ class SiteController extends Controller
                 
                 if ($model->save()) 
                 {
-                   return $this->redirect(['confirmar']);
+                   //return $this->redirect(['confirmar']);
+                   return $this->redirect(array('confirmar', 'id' => $model->id));
+                   //return $this->redirect(array('?r=site%2Fconfirmar', 'param'=>$model->confirmado));
                 }
-                else {
+                else 
+                {
                     return $this->redirect(['about']);
                 }
             }
@@ -163,22 +171,71 @@ class SiteController extends Controller
 
     public function actionConfirmar()
     {
-        $model = new \app\models\confirmarForm();
+        $model2 = new Usuarios();
 
-        if ($model->load(Yii::$app->request->post())) {
-            if ($model->validate()) {
-                // form inputs are valid, do something here
-                return $this->redirect(['index']);
-            }
-            else 
+        if ($model2->load(Yii::$app->request->post())) 
+        {
+            $table= new Usuarios();
+
+            if (Yii::$app->request->get()) 
             {
+                $id= Html::encode($_GET["id"]);
+                if ((int) $id) 
+                {
+                    $model=$table
+                    ->find()
+                    ->where("id=:id", [":id"=>$id]);
+
+                    if($model->count()==1)
+                    {
+                        if ($model2->confirmado==0) 
+                        {
+                            return $this->redirect(['confirmar']);
+                        }
+                        
+                        $activar=Usuarios::findOne($id);
+                        $activar->confirmado=$model2->confirmado;
+                        if($activar->update())
+                        {
+                            return $this->redirect(['login']);
+                        }
+                        else 
+                        {
+                            return $this->redirect(['index']);
+                        }
+                    }
+                    else 
+                    {
+                        return $this->redirect(['about']);
+                    }
+                }
+                else 
+                {
+                    return $this->redirect(['contact']);
+                } 
+            }
+            else {
                 return $this->redirect(['about']);
             }
         }
-
+        
         return $this->render('confirmar', [
-            'model' => $model,
+            'model' => $model2,
         ]);
+    }
+
+    public function actionCreate()
+    {
+        $model = new Usuarios();
+        if(isset($_POST['Model']))
+        {
+            $model->attributes=$_POST['Model'];
+            if($model->save())
+            {
+                $this->render('update',array('model'=>$model));
+            }
+        }
+        $this->render('create',array('model'=>$model));
     }
 }
 ?>
