@@ -39,7 +39,19 @@ class ActividadesController extends Controller
     {
         $searchModel = new ActividadesSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-
+      //  $prueba = $dataProvider->andFilterWhere(['like', 'id', 1])
+        var_dump($dataProvider);
+        return $this->render('index', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+    public function actionPublico()
+    {
+        $searchModel = new ActividadesSearch();
+        $dataProvider = $searchModel->search_publico($this->request->queryParams);
+      //  $prueba = $dataProvider->andFilterWhere(['like', 'id', 1])
+        var_dump($dataProvider);
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
