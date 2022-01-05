@@ -79,9 +79,19 @@ class SiteController extends Controller
 
         $model = new LoginForm();
 
-        if ($model->load(Yii::$app->request->post()) && $model->login() ) 
+        if ($model->load(Yii::$app->request->post()))// && $model->login() ) 
         {
-            return $this->goBack();
+            $var= Usuarios::findByUsername($model->username);
+            if ($var->confirmado==1) 
+            {
+                $model->login();
+                return $this->goBack();
+            }
+            else 
+            {
+                return $this->redirect(array('confirmar', 'id' => $var->id));
+            }
+            
         }
 
         
@@ -188,23 +198,23 @@ class SiteController extends Controller
 
                     if($model->count()==1)
                     {
-                        if ($model2->confirmado==0) 
+                        /*if ($model2->confirmado==0) 
                         {
                             return $this->redirect(['confirmar']);
-                        }
+                        }*/
                         
                         $activar=Usuarios::findOne($id);
                         $activar->confirmado=$model2->confirmado;
-                        if($activar->update())
+                        if($activar->update()) //si validas te lleva a login
                         {
                             return $this->redirect(['login']);
                         }
-                        else 
+                        else //sino validas te lleva a index
                         {
                             return $this->redirect(['index']);
                         }
                     }
-                    else 
+                    else //si el usuario no existe
                     {
                         return $this->redirect(['about']);
                     }

@@ -146,4 +146,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
         return $password;
         //return password_verify($password, $this->password);
     }
+
+  
 }

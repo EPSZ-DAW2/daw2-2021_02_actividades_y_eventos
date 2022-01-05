@@ -1,3 +1,4 @@
+{ HECHO
 ** En estas tareas tenéis la parte "privada" desde el punto de vista de
 un administrador de la aplicación de hacer el mantenimiento de usuarios,
 es decir, mantener la tabla correspondiente para tener los diferentes
@@ -11,6 +12,7 @@ clase de Usuario que hagáis que definan cada código de rol y con ellas
 tener un método que devuelva la lista de "rol" => "descripción", siendo
 "rol" la constante con el código del rol y "descripción" el nombre del
 rol si es diferente de su código.
+}
 
 - El mantenimiento de la configuración es más de lo mismo, pero además
 de eso, recomiendo que donde se necesite usar en la aplicación una
@@ -36,6 +38,7 @@ así que se necesita que la copia sea recuperable perfectamente. Y si se
 permite hacer más de una copia de seguridad, descargarla para guardarla
 en el PC local, o subirla para restaurarla después... ¡¡mucho mejor!!
 
+{ YA ESTA HECHO
 *** En la parte publica de la aplicación tenéis que hacer (más bien
 adaptar) la acción de login, el modelo y formulario de Login y todo lo
 que lleve alrededor. También debéis crear las acciones para el Registro
@@ -44,7 +47,7 @@ o similar, y tras el registro el envío de correo para que haga la
 confirmación o una vista que simule que el usuario hace la confirmación
 de que es correcto para que a partir de entonces pueda acceder a la
 aplicación.
-
+}
 - Y la pieza con la lista de Actividades con "ficha resumida" es una
 vista que sólo se debe preocupar de mostrar un diseño resumido de lo que
 contiene el modelo de "Actividad" que reciba como dato. Con eso

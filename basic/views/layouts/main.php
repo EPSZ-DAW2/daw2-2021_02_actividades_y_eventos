@@ -39,12 +39,19 @@ AppAsset::register($this);
 $navItems=[
     ['label' => 'Home', 'url' => ['/site/index']],
     ['label' => 'About', 'url' => ['/site/about']],
-    ['label' => 'Contact', 'url' => ['/site/contact']]
+    ['label' => 'Contact', 'url' => ['/site/contact']],
   ];
 
-  if (Yii::$app->user->isGuest) {
+  if (Yii::$app->user->isGuest) 
+  {
     array_push($navItems,['label' => 'Sign In', 'url' => ['/site/signin']],['label' => 'Login', 'url' => ['/site/login']]);
-  } else {
+  } 
+  else 
+  {
+    if (Yii::$app->user->identity->rol=="A") 
+    {
+        array_push($navItems,['label' => 'ADMIN', 'url' => ['/usuarios/index']]);
+    }
     array_push($navItems,['label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
         'url' => ['/site/logout'],
         'linkOptions' => ['data-method' => 'post']]
