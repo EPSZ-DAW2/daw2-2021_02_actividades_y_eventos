@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        
+
     </p>
 
     <?php Pjax::begin(); ?>
@@ -40,6 +40,7 @@ $this->params['breadcrumbs'][] = $this->title;
             //'notas:ntext',
             'url:ntext',
             'imagen_id',
+            'edad',
             //'edad_id',
             //'publica',
             //'visible',

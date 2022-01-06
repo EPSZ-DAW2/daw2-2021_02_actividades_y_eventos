@@ -8,7 +8,7 @@ use Yii;
  * This is the model class for table "actividades".
  *
  * @property int $id
- * @property string $titulo Titulo corto o slogan para la actividad.
+ *@property string $titulo Titulo corto o slogan para la actividad.
  * @property string|null $descripcion Descripción breve de la actividad o NULL si no es necesaria.
  * @property string|null $fecha_celebracion Fecha y Hora de celebración de la actividad o NULL si no se conoce (mostrar próximamente).
  * @property int $duracion_estimada Tiempo en Minutos de duración estimada de la actividad, si es CERO no se conoce o no es relevante.
@@ -42,9 +42,11 @@ use Yii;
  * @property int|null $modi_usuario_id Usuario que ha modificado la actividad por última vez o CERO (como si fuera NULL) si no existe o se hizo por un administrador de sistema.
  * @property string|null $modi_fecha Fecha y Hora de la última modificación de la actividad o NULL si no se conoce por algún motivo.
  * @property string|null $notas_admin Notas adicionales para los administradores sobre la actividad o NULL si no hay.
+
  */
 class Actividades extends \yii\db\ActiveRecord
 {
+  public $edad;
     /**
      * {@inheritdoc}
      */
@@ -59,6 +61,7 @@ class Actividades extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+           [['edad','edad_id'], 'safe'],
             [['titulo'], 'required'],
             [['titulo', 'descripcion', 'detalles_celebracion', 'direccion', 'como_llegar', 'notas_lugar', 'notas', 'url', 'notas_terminacion', 'notas_bloqueo', 'formulario_participacion', 'notas_admin'], 'string'],
             [['fecha_celebracion', 'fecha_terminacion', 'fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
@@ -118,5 +121,39 @@ class Actividades extends \yii\db\ActiveRecord
     public static function find()
     {
         return new ActividadesQuery(get_called_class());
+    }
+    public  function afterfind()
+    {
+      parent::afterFind();
+//atributo virtual edad sustituimos el edad_id por su valor
+      switch ($this->edad_id) {
+        case 1:
+        $this->edad = "Bebé (0 a 3 años)";
+            break;
+        case 2:
+        $this->edad = "Infantil (4 a 9)";
+                break;
+        case 3:
+        $this->edad = "Alevín (10 a 14) y Juvenil (15 a 17)";
+                break;
+        case 4:
+        $this->edad = "Adulto Joven (18-25)";
+                break;
+        case 5:
+        $this->edad = "Adulto Medio (26-35)";
+                break;
+        case 6:
+        $this->edad = "Adulto Mayor (36-65)";
+                break;
+        case 6:
+        $this->edad = "Tercera edad (>66)";
+                break;
+
+
+        default:
+        $this->edad = "Todas las edades";
+          break;
+      }
+
     }
 }

@@ -52,9 +52,9 @@ class ActividadesController extends Controller
         $searchModel = new ActividadesSearch();
         $dataProvider = $searchModel->search_publico($this->request->queryParams);
       //  $prueba = $dataProvider->andFilterWhere(['like', 'id', 1])
-        var_dump($dataProvider);
-        return $this->render('index', [
-        
+        //var_dump($dataProvider);
+        return $this->render('publico', [
+
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -72,7 +72,12 @@ class ActividadesController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-
+    public function actionViewpublic($id)
+    {
+        return $this->render('vista', [
+            'model' => $this->findModel($id),
+        ]);
+    }
     /**
      * Creates a new Actividades model.
      * If creation is successful, the browser will be redirected to the 'view' page.
