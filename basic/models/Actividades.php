@@ -47,6 +47,7 @@ use Yii;
 class Actividades extends \yii\db\ActiveRecord
 {
   public $edad;
+  public $area;
     /**
      * {@inheritdoc}
      */
@@ -61,7 +62,7 @@ class Actividades extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-           [['edad','edad_id'], 'safe'],
+           [['edad','edad_id','area'], 'safe'],
             [['titulo'], 'required'],
             [['titulo', 'descripcion', 'detalles_celebracion', 'direccion', 'como_llegar', 'notas_lugar', 'notas', 'url', 'notas_terminacion', 'notas_bloqueo', 'formulario_participacion', 'notas_admin'], 'string'],
             [['fecha_celebracion', 'fecha_terminacion', 'fecha_denuncia1', 'fecha_bloqueo', 'crea_fecha', 'modi_fecha'], 'safe'],
@@ -154,6 +155,28 @@ class Actividades extends \yii\db\ActiveRecord
         $this->edad = "Todas las edades";
           break;
       }
+      //atributo virtual area sustituimos el area_id por su valor
+            switch ($this->area_id) {
+              case 1:
+              $this->area = "Pais";
+                  break;
+              case 2:
+              $this->area = "Comunidad Autonoma";
+                      break;
+              case 3:
+              $this->area = "Provincia";
+                      break;
+              case 4:
+              $this->area = "Población";
+                      break;
+              case 5:
+              $this->area = "Zona";
+                      break;
 
+
+              default:
+              $this->area = "Sin definir area";
+                break;
+            }
     }
 }

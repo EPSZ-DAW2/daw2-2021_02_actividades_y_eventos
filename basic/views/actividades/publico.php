@@ -34,6 +34,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'duracion_estimada',
             'detalles_celebracion:ntext',
             'direccion:ntext',
+            'area',
             //'como_llegar:ntext',
             //'notas_lugar:ntext',
             //'area_id',
