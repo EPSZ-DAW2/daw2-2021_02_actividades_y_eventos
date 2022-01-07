@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Actividades;
-use app\models\ActividadesSearch;
+use app\models\ActividadParticipantes;
+use app\models\ActividadParticipantesSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ActividadesController implements the CRUD actions for Actividades model.
+ * ActividadParticipantesController implements the CRUD actions for ActividadParticipantes model.
  */
-class ActividadesController extends Controller
+class ActividadParticipantesController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,36 +32,22 @@ class ActividadesController extends Controller
     }
 
     /**
-     * Lists all Actividades models.
+     * Lists all ActividadParticipantes models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new ActividadesSearch();
+        $searchModel = new ActividadParticipantesSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-      //  $prueba = $dataProvider->andFilterWhere(['like', 'id', 1])
-        //var_dump($dataProvider);
-        //return $this->render('index', [
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
-    }
-    public function actionPublico()
-    {
-        $searchModel = new ActividadesSearch();
-        $dataProvider = $searchModel->search_publico($this->request->queryParams);
-      //  $prueba = $dataProvider->andFilterWhere(['like', 'id', 1])
-        //var_dump($dataProvider);
-        return $this->render('publico', [
 
+        return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Actividades model.
+     * Displays a single ActividadParticipantes model.
      * @param int $id ID
      * @return mixed
      * @throws NotFoundHttpException if the model cannot be found
@@ -72,20 +58,15 @@ class ActividadesController extends Controller
             'model' => $this->findModel($id),
         ]);
     }
-    public function actionViewpublic($id)
-    {
-        return $this->render('vista', [
-            'model' => $this->findModel($id),
-        ]);
-    }
+
     /**
-     * Creates a new Actividades model.
+     * Creates a new ActividadParticipantes model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
-        $model = new Actividades();
+        $model = new ActividadParticipantes();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -101,7 +82,7 @@ class ActividadesController extends Controller
     }
 
     /**
-     * Updates an existing Actividades model.
+     * Updates an existing ActividadParticipantes model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return mixed
@@ -121,7 +102,7 @@ class ActividadesController extends Controller
     }
 
     /**
-     * Deletes an existing Actividades model.
+     * Deletes an existing ActividadParticipantes model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return mixed
@@ -135,15 +116,15 @@ class ActividadesController extends Controller
     }
 
     /**
-     * Finds the Actividades model based on its primary key value.
+     * Finds the ActividadParticipantes model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Actividades the loaded model
+     * @return ActividadParticipantes the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Actividades::findOne($id)) !== null) {
+        if (($model = ActividadParticipantes::findOne($id)) !== null) {
             return $model;
         }
 

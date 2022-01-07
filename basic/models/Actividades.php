@@ -146,7 +146,7 @@ class Actividades extends \yii\db\ActiveRecord
         case 6:
         $this->edad = "Adulto Mayor (36-65)";
                 break;
-        case 6:
+        case 7:
         $this->edad = "Tercera edad (>66)";
                 break;
 
