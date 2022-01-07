@@ -60,6 +60,9 @@ class ActividadesController extends Controller
         ]);
     }
 
+
+
+
     /**
      * Displays a single Actividades model.
      * @param int $id ID

@@ -48,6 +48,10 @@ class Actividades extends \yii\db\ActiveRecord
 {
   public $edad;
   public $area;
+  public $publica1;
+  public $visible1;
+
+
     /**
      * {@inheritdoc}
      */
@@ -128,55 +132,87 @@ class Actividades extends \yii\db\ActiveRecord
       parent::afterFind();
 //atributo virtual edad sustituimos el edad_id por su valor
       switch ($this->edad_id) {
-        case 1:
-        $this->edad = "Bebé (0 a 3 años)";
-            break;
-        case 2:
-        $this->edad = "Infantil (4 a 9)";
+                case 1:
+                $this->edad = "Bebé (0 a 3 años)";
+                        break;
+                case 2:
+                $this->edad = "Infantil (4 a 9)";
+                        break;
+                case 3:
+                $this->edad = "Alevín (10 a 14) y Juvenil (15 a 17)";
+                        break;
+                case 4:
+                $this->edad = "Adulto Joven (18-25)";
+                        break;
+                case 5:
+                $this->edad = "Adulto Medio (26-35)";
+                        break;
+                case 6:
+                $this->edad = "Adulto Mayor (36-65)";
+                        break;
+                case 7:
+                $this->edad = "Tercera edad (>66)";
+                        break;
+
+
+                default:
+                $this->edad = "Todas las edades";
+                        break;
+        }
+      //atributo virtual area sustituimos el area_id por su valor
+        switch ($this->area_id) {
+                case 1:
+                $this->area = "Pais";
+                        break;
+                case 2:
+                $this->area = "Comunidad Autonoma";
+                        break;
+                case 3:
+                $this->area = "Provincia";
+                        break;
+                case 4:
+                $this->area = "Población";
+                        break;
+                case 5:
+                $this->area = "Zona";
+                        break;
+
+
+                default:
+                $this->area = "Sin definir area";
                 break;
-        case 3:
-        $this->edad = "Alevín (10 a 14) y Juvenil (15 a 17)";
+        }
+
+        //Comprobamos que la fecha de celebracion sea mayor que la fecha actual
+        if ($this->fecha_celebracion < date('Y-m-d')) {
+            $this->terminada = 1;
+            // Lo actualizamos en la BD
+
+        }
+        switch($this->publica){
+            case 0:
+                $this->publica1 = "Privado";
                 break;
-        case 4:
-        $this->edad = "Adulto Joven (18-25)";
+            case 1:
+                $this->publica1 = "Público";
                 break;
-        case 5:
-        $this->edad = "Adulto Medio (26-35)";
+        }
+        switch($this->visible){
+            case 0:
+                $this->visible1 = "No visible";
                 break;
-        case 6:
-        $this->edad = "Adulto Mayor (36-65)";
-                break;
+<<<<<<< HEAD
         case 7:
         $this->edad = "Tercera edad (>66)";
+=======
+            case 1:
+                $this->visible1 = "Visible";
+>>>>>>> ff8b8f8a3eaf135b8e1fe9d3e36e541dca632957
                 break;
+        }
 
 
-        default:
-        $this->edad = "Todas las edades";
-          break;
-      }
-      //atributo virtual area sustituimos el area_id por su valor
-            switch ($this->area_id) {
-              case 1:
-              $this->area = "Pais";
-                  break;
-              case 2:
-              $this->area = "Comunidad Autonoma";
-                      break;
-              case 3:
-              $this->area = "Provincia";
-                      break;
-              case 4:
-              $this->area = "Población";
-                      break;
-              case 5:
-              $this->area = "Zona";
-                      break;
 
 
-              default:
-              $this->area = "Sin definir area";
-                break;
-            }
     }
 }
