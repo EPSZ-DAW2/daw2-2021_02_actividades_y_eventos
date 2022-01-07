@@ -42,7 +42,7 @@ class ActividadesController extends Controller
       //  $prueba = $dataProvider->andFilterWhere(['like', 'id', 1])
         //var_dump($dataProvider);
         //return $this->render('index', [
-        return $this->render('publico', [
+        return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
@@ -59,6 +59,9 @@ class ActividadesController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
+
+
 
     /**
      * Displays a single Actividades model.
