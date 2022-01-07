@@ -68,9 +68,9 @@ class UsuariosController extends Controller
     public function actionIndex()
     {
         //$var= Usuarios::findByUsername(Yii::$app->user->identity->nick);
-        $rol= UsuariosController::getUserRol();
+        $rol= self::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M" ) 
         {
             $searchModel = new UsuariosSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
@@ -97,7 +97,7 @@ class UsuariosController extends Controller
     {
         $rol= UsuariosController::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M") 
         {
             return $this->render('view', [
                 'model' => $this->findModel($id),
@@ -118,7 +118,7 @@ class UsuariosController extends Controller
     {
         $rol= UsuariosController::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M") 
         {
             $model = new Usuarios();
 
@@ -151,7 +151,7 @@ class UsuariosController extends Controller
     {
         $rol= UsuariosController::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M") 
         {
             $model = $this->findModel($id);
 
@@ -181,7 +181,7 @@ class UsuariosController extends Controller
     {
         $rol= UsuariosController::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M") 
         {
             $this->findModel($id)->delete();
 

@@ -10,6 +10,7 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -48,7 +49,8 @@ $navItems=[
   } 
   else 
   {
-    if (Yii::$app->user->identity->rol=="A") 
+      $rol= Yii::$app->user->identity->rol;
+    if ($rol=="A" || $rol=="M") 
     {
         array_push($navItems,['label' => 'ADMIN', 'url' => ['/usuarios/index']]);
     }

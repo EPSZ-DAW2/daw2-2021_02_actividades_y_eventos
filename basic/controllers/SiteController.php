@@ -12,6 +12,7 @@ use app\models\ContactForm;
 use app\models\Usuarios;
 use yii\helpers\Html;
 
+
 class SiteController extends Controller
 {
     /**
@@ -73,33 +74,80 @@ class SiteController extends Controller
      */
     public function actionLogin() //FALTA COMPROBAR SI ESTA CONFIRMADO
     {
-        if (!Yii::$app->user->isGuest) {
-            return $this->goHome();
-        }
+        $session = Yii::$app->session;
 
-        $model = new LoginForm();
-
-        if ($model->load(Yii::$app->request->post()))// && $model->login() ) 
+        if ($session->isActive )
         {
-            $var= Usuarios::findByUsername($model->username);
-            if ($var->confirmado==1) 
-            {
-                $model->login();
-                return $this->goBack();
+           
+            if (!Yii::$app->user->isGuest) {
+                return $this->goHome();
             }
-            else 
+
+            $model = new LoginForm();
+
+            if ($model->load(Yii::$app->request->post()))
             {
-                return $this->redirect(array('confirmar', 'id' => $var->id));
+                $var= Usuarios::findByUsername($model->username);
+
+                if($session['loginIntentos'] < 5)
+                {
+                   
+                    if ($var!=null) 
+                    {
+                        if ($var->confirmado==1) 
+                        {
+                            if ($model->password==$var->password) 
+                            {
+                                $model->login();
+                                return $this->goBack();
+                            }
+                            else 
+                            {
+                                $session['loginIntentos'] = $session['loginIntentos'] + 1;
+                                $var->num_accesos++;
+                                $var->save();
+                            }        
+                        }
+                        else 
+                        {
+                            return $this->redirect(array('confirmar', 'id' => $var->id));
+                        }
+                    }
+                        /* else 
+                    {
+                        $session['loginIntentos'] = $session['loginIntentos'] + 1;
+                        //$var->num_accesos++;
+                        //$var->save();
+                    } */
+                }
+                else 
+                {
+                    $var->bloqueado=1;
+                    $var->fecha_bloqueo=date('Y-m-d H:i:s');
+                    $var->notas_bloqueo="bloqueado por superar el limite de intentos de acceso";
+                    $var->save();
+                    die('numero de intentos maximos alcanzado');
+                    //COMENTAR EL DIE Y DESCOMENTAR LO DE ABAJO PARA DESBLOQUEAR LA SESION
+                    /*$session['loginIntentos']=0;
+                    $session->close();
+                    return $this->redirect(['index']);*/
+                }
             }
-            
+
+            $model->password = '';
+            return $this->render('login', [
+                'model' => $model,
+            ]);
         }
-
-        
-
-        $model->password = '';
-        return $this->render('login', [
-            'model' => $model,
-        ]);
+        else
+        {
+            $session->open();
+            $session['loginIntentos']=0;
+            $session['usuario']='';
+           /* return $this->render('login', [
+                'model' => $model,
+            ]);*/
+        }
     }
 
     /**
@@ -109,8 +157,13 @@ class SiteController extends Controller
      */
     public function actionLogout()
     {
-        Yii::$app->user->logout();
+        $session = Yii::$app->session;
+        if ($session->isActive)
+        {
+            $session->close();
+        }
 
+        Yii::$app->user->logout();   
         return $this->goHome();
     }
 
