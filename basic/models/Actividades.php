@@ -187,6 +187,7 @@ class Actividades extends \yii\db\ActiveRecord
         if ($this->fecha_celebracion < date('Y-m-d')) {
             $this->terminada = 1;
             // Lo actualizamos en la BD
+            
 
         }
         switch($this->publica){
