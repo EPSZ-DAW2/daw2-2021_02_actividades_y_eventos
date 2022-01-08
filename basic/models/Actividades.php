@@ -127,6 +127,7 @@ class Actividades extends \yii\db\ActiveRecord
     {
         return new ActividadesQuery(get_called_class());
     }
+
     public  function afterfind()
     {
       parent::afterFind();
@@ -206,4 +207,5 @@ class Actividades extends \yii\db\ActiveRecord
 
 
     }
+}
 }

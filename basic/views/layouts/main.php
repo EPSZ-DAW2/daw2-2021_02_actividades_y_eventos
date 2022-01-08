@@ -40,7 +40,8 @@ AppAsset::register($this);
 $navItems=[
     ['label' => 'Home', 'url' => ['/site/index']],
     ['label' => 'About', 'url' => ['/site/about']],
-    ['label' => 'Contact', 'url' => ['/site/contact']],
+    //['label' => 'Contact', 'url' => ['/site/contact']],
+    ['label' => 'Actividades', 'url' => ['/actividades/ficharesumida']],
   ];
 
   if (Yii::$app->user->isGuest) 
@@ -49,10 +50,11 @@ $navItems=[
   } 
   else 
   {
-      $rol= Yii::$app->user->identity->rol;
+    $rol= Yii::$app->user->identity->rol;
     if ($rol=="A" || $rol=="M") 
     {
-        array_push($navItems,['label' => 'ADMIN', 'url' => ['/usuarios/index']]);
+        array_push($navItems,['label' => 'ADMIN USUARIOS', 'url' => ['/usuarios/index']]);
+        array_push($navItems,['label' => 'ADMIN ACTIVIDADES', 'url' => ['/actividades/index']]);
     }
     array_push($navItems,['label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
         'url' => ['/site/logout'],
