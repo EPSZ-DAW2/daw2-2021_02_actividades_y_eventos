@@ -90,7 +90,7 @@ class SiteController extends Controller
             {
                 $var= Usuarios::findByUsername($model->username);
 
-                if($session['loginIntentos'] < 44)
+                if($session['loginIntentos'] < 4)
                 {
                    
                     if ($var!=null) 
