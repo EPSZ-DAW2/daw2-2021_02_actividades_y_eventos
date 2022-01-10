@@ -61,9 +61,6 @@ class ActividadesController extends Controller
         ]);
     }
 
-
-
-
     /**
      * Displays a single Actividades model.
      * @param int $id ID
@@ -88,9 +85,7 @@ class ActividadesController extends Controller
     {
         $searchModel = new ActividadesSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
-      //  $prueba = $dataProvider->andFilterWhere(['like', 'id', 1])
-        //var_dump($dataProvider);
-        //return $this->render('index', [
+
         return $this->render('ficha_resumida', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

@@ -73,13 +73,12 @@ class SiteController extends Controller
      *
      * @return Response|string
      */
-    public function actionLogin() //FALTA COMPROBAR SI ESTA CONFIRMADO
+    public function actionLogin() 
     {
         $session = Yii::$app->session;
 
         if ($session->isActive )
-        {
-           
+        { 
             if (!Yii::$app->user->isGuest) {
                 return $this->goHome();
             }
@@ -92,7 +91,6 @@ class SiteController extends Controller
 
                 if($session['loginIntentos'] < 4)
                 {
-                   
                     if ($var!=null) 
                     {
                         if ($var->confirmado==1) 
@@ -129,7 +127,6 @@ class SiteController extends Controller
                     return $this->redirect(['index']);*/
                 }
             }
-
             $model->password = '';
             return $this->render('login', [
                 'model' => $model,
@@ -140,9 +137,6 @@ class SiteController extends Controller
             $session->open();
             $session['loginIntentos']=0;
             $session['usuario']='';
-           /* return $this->render('login', [
-                'model' => $model,
-            ]);*/
         }
     }
 
@@ -260,16 +254,16 @@ class SiteController extends Controller
                     }
                     else //si el usuario no existe
                     {
-                        return $this->redirect(['about']);
+                        return $this->redirect(['index']);
                     }
                 }
                 else 
                 {
-                    return $this->redirect(['contact']);
+                    return $this->redirect(['index']);
                 } 
             }
             else {
-                return $this->redirect(['about']);
+                return $this->redirect(['index']);
             }
         }
         

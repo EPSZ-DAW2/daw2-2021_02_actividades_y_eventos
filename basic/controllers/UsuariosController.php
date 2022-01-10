@@ -39,17 +39,6 @@ class UsuariosController extends Controller
                         ],
                     ],            
         ];
-        /*return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );*/
     }
 
 
@@ -67,7 +56,6 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
-        //$var= Usuarios::findByUsername(Yii::$app->user->identity->nick);
         $rol= self::getUserRol();
 
         if ($rol=="A" || $rol=="M" ) 
@@ -167,7 +155,6 @@ class UsuariosController extends Controller
         {
             return $this->redirect(['site/index']);
         }
-
     }
 
     /**
@@ -191,7 +178,6 @@ class UsuariosController extends Controller
         {
             return $this->redirect(['site/index']);
         }
-
     }
 
     /**
