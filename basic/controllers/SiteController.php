@@ -13,7 +13,8 @@ use app\models\Usuarios;
 use yii\helpers\Html;
 
 
-class SiteController extends Controller
+
+class SiteController extends Controller 
 {
     /**
      * {@inheritdoc}
@@ -89,7 +90,7 @@ class SiteController extends Controller
             {
                 $var= Usuarios::findByUsername($model->username);
 
-                if($session['loginIntentos'] < 5)
+                if($session['loginIntentos'] < 44)
                 {
                    
                     if ($var!=null) 
@@ -106,6 +107,7 @@ class SiteController extends Controller
                                 $session['loginIntentos'] = $session['loginIntentos'] + 1;
                                 $var->num_accesos++;
                                 $var->save();
+                                self::logErrorLogin($model->username, $model->password);  
                             }        
                         }
                         else 
@@ -113,12 +115,6 @@ class SiteController extends Controller
                             return $this->redirect(array('confirmar', 'id' => $var->id));
                         }
                     }
-                        /* else 
-                    {
-                        $session['loginIntentos'] = $session['loginIntentos'] + 1;
-                        //$var->num_accesos++;
-                        //$var->save();
-                    } */
                 }
                 else 
                 {
@@ -212,18 +208,18 @@ class SiteController extends Controller
                 
                 if ($model->save()) 
                 {
-                   //return $this->redirect(['confirmar']);
                    return $this->redirect(array('confirmar', 'id' => $model->id));
-                   //return $this->redirect(array('?r=site%2Fconfirmar', 'param'=>$model->confirmado));
                 }
                 else 
                 {
-                    return $this->redirect(['about']);
+                    self::logErrorSignin($model->nick, $model->email);
+                    return $this->redirect(['index']);
                 }
             }
-            else {
-                return $this->redirect(['index']);
-                //hacer pagina que diga que te has registrado mal
+            else 
+            {
+                self::logErrorSignin($model->nick, $model->email);
+                return $this->redirect(['signin']);
             }
         }
 
@@ -250,12 +246,7 @@ class SiteController extends Controller
                     ->where("id=:id", [":id"=>$id]);
 
                     if($model->count()==1)
-                    {
-                        /*if ($model2->confirmado==0) 
-                        {
-                            return $this->redirect(['confirmar']);
-                        }*/
-                        
+                    {   
                         $activar=Usuarios::findOne($id);
                         $activar->confirmado=$model2->confirmado;
                         if($activar->update()) //si validas te lleva a login
@@ -299,6 +290,24 @@ class SiteController extends Controller
             }
         }
         $this->render('create',array('model'=>$model));
+    }
+
+    public function logErrorLogin($usuario, $password)
+    {
+        $logFile = fopen("../log/log.txt", 'a') or die("Error creando archivo");
+        fwrite($logFile, "\n".date("d/m/Y H:i:s")." -> LOGIN: el usuario ".$usuario. " y la password ". $password ." es incorrecta") 
+        or 
+        die("Error escribiendo en el archivo");
+        fclose($logFile);
+    }
+
+    public function logErrorSignin($usuario, $email)
+    {
+        $logFile = fopen("../log/log.txt", 'a') or die("Error creando archivo");
+        fwrite($logFile, "\n".date("d/m/Y H:i:s")." -> SIGN IN: el usuario ".$usuario. " o el correo ". $email ." ya existe") 
+        or 
+        die("Error escribiendo en el archivo");
+        fclose($logFile);
     }
 }
 ?>
