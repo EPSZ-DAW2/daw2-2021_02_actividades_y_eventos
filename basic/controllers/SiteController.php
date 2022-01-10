@@ -309,5 +309,6 @@ class SiteController extends Controller
         die("Error escribiendo en el archivo");
         fclose($logFile);
     }
+
 }
 ?>

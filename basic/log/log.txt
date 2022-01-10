@@ -2,3 +2,4 @@
 10/01/2022 17:59:12 -> el usuario admin y la password 1 es incorrecta
 10/01/2022 17:59:17 -> el usuario admin y la password 123 es incorrecta
 10/01/2022 18:10:05 -> SIGN IN: el usuario admin o el correo 123 ya existe
+10/01/2022 18:35:51 -> SIGN IN: el usuario admin o el correo hola ya existe
