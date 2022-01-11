@@ -1,7 +1,7 @@
 <?php
 
 namespace app\controllers;
-
+use app\models\ActividadesSearch;
 use app\models\ActividadParticipantes;
 use app\models\ActividadParticipantesSearch;
 use yii\web\Controller;
@@ -37,12 +37,16 @@ class ActividadParticipantesController extends Controller
      */
     public function actionIndex()
     {
+        $a_1= new ActividadesSearch();
+        $a_data= $a_1->search($this->request->queryParams);
         $searchModel = new ActividadParticipantesSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
+            'a_1' => $a_1,
+            'a_data' =>$a_data,
         ]);
     }
 

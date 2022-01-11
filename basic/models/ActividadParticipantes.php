@@ -17,9 +17,12 @@ use Yii;
  */
 class ActividadParticipantes extends \yii\db\ActiveRecord
 {
-    /**
+
+    /**  public $edad;
+
      * {@inheritdoc}
      */
+    public $actividad;
     public static function tableName()
     {
         return 'actividad_participantes';
@@ -31,6 +34,7 @@ class ActividadParticipantes extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+          [['actividad'], 'safe'],
             [['fecha_registro', 'actividad_id', 'usuario_id', 'fecha_cancelacion'], 'required'],
             [['fecha_registro', 'fecha_cancelacion'], 'safe'],
             [['actividad_id', 'usuario_id'], 'integer'],
@@ -62,4 +66,7 @@ class ActividadParticipantes extends \yii\db\ActiveRecord
     {
         return new ActividadParticipantesQuery(get_called_class());
     }
+    public  function afterfind()
+    { $this->actividad = "No encontrado";
+}
 }

@@ -201,18 +201,11 @@ class Actividades extends \yii\db\ActiveRecord
             case 0:
                 $this->visible1 = "No visible";
                 break;
-<<<<<<< HEAD
-        case 7:
-        $this->edad = "Tercera edad (>66)";
-=======
-            case 1:
-                $this->visible1 = "Visible";
->>>>>>> ff8b8f8a3eaf135b8e1fe9d3e36e541dca632957
-                break;
+
         }
 
 
 
 
     }
-}
+  }
