@@ -39,17 +39,6 @@ class UsuariosController extends Controller
                         ],
                     ],            
         ];
-        /*return array_merge(
-            parent::behaviors(),
-            [
-                'verbs' => [
-                    'class' => VerbFilter::className(),
-                    'actions' => [
-                        'delete' => ['POST'],
-                    ],
-                ],
-            ]
-        );*/
     }
 
 
@@ -67,10 +56,9 @@ class UsuariosController extends Controller
      */
     public function actionIndex()
     {
-        //$var= Usuarios::findByUsername(Yii::$app->user->identity->nick);
-        $rol= UsuariosController::getUserRol();
+        $rol= self::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M" ) 
         {
             $searchModel = new UsuariosSearch();
             $dataProvider = $searchModel->search($this->request->queryParams);
@@ -97,7 +85,7 @@ class UsuariosController extends Controller
     {
         $rol= UsuariosController::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M") 
         {
             return $this->render('view', [
                 'model' => $this->findModel($id),
@@ -118,7 +106,7 @@ class UsuariosController extends Controller
     {
         $rol= UsuariosController::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M") 
         {
             $model = new Usuarios();
 
@@ -151,7 +139,7 @@ class UsuariosController extends Controller
     {
         $rol= UsuariosController::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M") 
         {
             $model = $this->findModel($id);
 
@@ -167,7 +155,6 @@ class UsuariosController extends Controller
         {
             return $this->redirect(['site/index']);
         }
-
     }
 
     /**
@@ -181,7 +168,7 @@ class UsuariosController extends Controller
     {
         $rol= UsuariosController::getUserRol();
 
-        if ($rol=="A") 
+        if ($rol=="A" || $rol=="M") 
         {
             $this->findModel($id)->delete();
 
@@ -191,7 +178,6 @@ class UsuariosController extends Controller
         {
             return $this->redirect(['site/index']);
         }
-
     }
 
     /**

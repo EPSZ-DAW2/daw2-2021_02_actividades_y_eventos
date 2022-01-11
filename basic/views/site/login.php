@@ -34,6 +34,17 @@ $this->params['breadcrumbs'][] = $this->title;
 
         <div class="form-group">
             <div class="offset-lg-1 col-lg-11">
+                <?php 
+                $session = Yii::$app->session;
+                if ($session->isActive )
+                {
+                    if ($session['loginIntentos'] > 0) 
+                    {
+                         echo "te quedan ". 5-$session['loginIntentos'] . " intento(s)";
+                    }
+                   
+                }
+                ?>
                 <?= Html::submitButton('Login', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
             </div>
         </div>       

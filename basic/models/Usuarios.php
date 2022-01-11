@@ -101,9 +101,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     }
 
 
-
-
-
     public static function findIdentity($id)
     {
         return self::findOne($id);
@@ -119,11 +116,6 @@ class Usuarios extends \yii\db\ActiveRecord implements \yii\web\IdentityInterfac
     {
         return self::findOne(['nick'=>$username]);
     }
-
-
-
-
-
 
     public function getId()
     {

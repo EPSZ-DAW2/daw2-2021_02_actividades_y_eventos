@@ -14,6 +14,7 @@ tener un método que devuelva la lista de "rol" => "descripción", siendo
 rol si es diferente de su código.
 }
 
+{ HECHO
 - El mantenimiento de la configuración es más de lo mismo, pero además
 de eso, recomiendo que donde se necesite usar en la aplicación una
 variable de configuración, se llame a un método estático del modelo de
@@ -22,6 +23,7 @@ acceso a la base de datos en múltiples lugares. Por eso yo tendría en el
 modelo de configuración métodos estáticos tipo "getXXXXX()" para obtener
 cada variable de configuración de la base de datos... Y luego informar a
 los compañeros de trabajo cómo deben utilizar esos métodos.
+}
 
 - Lo de los Logs serían mensajes que la aplicación genera (que no son
 los de depuración de Yii2) para que un administrador o los mismos

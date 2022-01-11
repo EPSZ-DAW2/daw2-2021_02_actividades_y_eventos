@@ -10,6 +10,7 @@ use yii\bootstrap5\Html;
 use yii\bootstrap5\Nav;
 use yii\bootstrap5\NavBar;
 
+
 AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
@@ -18,6 +19,7 @@ AppAsset::register($this);
 <head>
     <meta charset="<?= Yii::$app->charset ?>">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <script type="text/javascript" src="https://cdn3.professor-falken.com/recursos/js/snowstorm.js"></script>
     <?php $this->registerCsrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
@@ -39,7 +41,8 @@ AppAsset::register($this);
 $navItems=[
     ['label' => 'Home', 'url' => ['/site/index']],
     ['label' => 'About', 'url' => ['/site/about']],
-    ['label' => 'Contact', 'url' => ['/site/contact']],
+    //['label' => 'Contact', 'url' => ['/site/contact']],
+    ['label' => 'Actividades', 'url' => ['/actividades/ficharesumida']],
   ];
 
   if (Yii::$app->user->isGuest) 
@@ -48,9 +51,11 @@ $navItems=[
   } 
   else 
   {
-    if (Yii::$app->user->identity->rol=="A") 
+    $rol= Yii::$app->user->identity->rol;
+    if ($rol=="A" || $rol=="M") 
     {
-        array_push($navItems,['label' => 'ADMIN', 'url' => ['/usuarios/index']]);
+        array_push($navItems,['label' => 'ADMIN USUARIOS', 'url' => ['/usuarios/index']]);
+        array_push($navItems,['label' => 'ADMIN ACTIVIDADES', 'url' => ['/actividades/index']]);
     }
     array_push($navItems,['label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
         'url' => ['/site/logout'],
