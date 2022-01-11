@@ -205,3 +205,4 @@ class Actividades extends \yii\db\ActiveRecord
                 break;
 
 }}
+}
