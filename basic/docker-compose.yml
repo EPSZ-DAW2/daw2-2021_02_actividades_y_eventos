@@ -7,3 +7,16 @@ services:
       - ./:/app:delegated
     ports:
       - '8000:80'
+    depends_on:
+      - mysql
+  mysql:
+    image: "mysql:8.0"
+    environment:
+      MYSQL_ROOT_PASSWORD: ' '
+    volumes:
+      - 'daw2_v:/var/lib/mysql'
+      - '.:/home/'
+      - '..:/home/sql'
+volumes:
+  daw2_v:
+    driver: local
