@@ -43,6 +43,7 @@ $navItems=[
     ['label' => 'About', 'url' => ['/site/about']],
     //['label' => 'Contact', 'url' => ['/site/contact']],
     ['label' => 'Actividades', 'url' => ['/actividades/ficharesumida']],
+    ['label' => 'Areas', 'url' => ['/area/index']],
   ];
 
   if (Yii::$app->user->isGuest) 

@@ -10,7 +10,9 @@
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
-
+drop database if exists daw2_actividades;
+create database if not exists daw2_actividades;
+use daw2_actividades;
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -289,7 +291,7 @@ CREATE TABLE `logs` (
   `id` int(12) UNSIGNED NOT NULL,
   `fecha` datetime NOT NULL COMMENT 'Fecha y Hora del mensaje de LOG.',
   `clase_log_id` char(1) NOT NULL COMMENT 'código de clase de log: E=Error, A=Aviso, S=Seguimiento, I=Información, D=Depuración, ...',
-  `modulo` text DEFAULT 'app' COMMENT 'Modulo o Sección de la aplicación que ha generado el mensaje de LOG.',
+  `modulo` text DEFAULT NULL COMMENT 'Modulo o Sección de la aplicación que ha generado el mensaje de LOG.',
   `texto` text DEFAULT NULL COMMENT 'Texto con el mensaje de LOG.'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
