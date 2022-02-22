@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
+
 //http://localhost/DAW2/trabajo/daw2-2021_02_actividades_y_eventos/basic/web/?r=actividades%2Fficharesumida
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ActividadesSearch */
@@ -16,8 +17,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-  
 
+    
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
         'filterModel' => $searchModel,
@@ -60,10 +61,19 @@ $this->params['breadcrumbs'][] = $this->title;
             //'modi_fecha',
             //'notas_admin:ntext',
 
-            //['class' => 'yii\grid\ActionColumn'],
-            ['class' => 'yii\grid\ActionColumn', 'template' => '{view}'],
-             
-        ],
+            //['class' => 'yii\grid\ActionColumn', ],
+            [
+                'class' => 'yii\grid\ActionColumn', 
+                'template' => '{view} {Seguir}',
+                'buttons' => [
+                    'Seguir' => function($url, $model, $key) {
+                        $rol= Yii::$app->user->identity->rol;
+                        if($rol!="N") return '';
+                        return Html::a('Seguir', ['/actividades/follow'], ['class' => 'btn btn-primary']);
+                    }
+                ],
+            ],
+        ]
     ]); ?>
 
 
