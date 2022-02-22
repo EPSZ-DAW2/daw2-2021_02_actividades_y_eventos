@@ -55,9 +55,16 @@ $navItems=[
     $rol= Yii::$app->user->identity->rol;
     if ($rol=="A" || $rol=="M") 
     {
-        array_push($navItems,['label' => 'ADMIN USUARIOS', 'url' => ['/usuarios/index']]);
-        array_push($navItems,['label' => 'ADMIN ACTIVIDADES', 'url' => ['/actividades/index']]);
+        array_push($navItems,['label' => 'ADMIN Usuarios', 'url' => ['/usuarios/index']]);
+        array_push($navItems,['label' => 'ADMIN Actividades', 'url' => ['/actividades/index']]);
     }
+
+    if ($rol=="N") 
+    {
+        array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/InscribirseActividad']]);
+        //array_push($navItems,['label' => 'NOTIFICACIONES', 'url' => ['/actividades/index']]);
+    }
+
     array_push($navItems,['label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
         'url' => ['/site/logout'],
         'linkOptions' => ['data-method' => 'post']]
