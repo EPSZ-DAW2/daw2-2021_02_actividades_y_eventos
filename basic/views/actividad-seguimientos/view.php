@@ -15,15 +15,33 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-    <p>
-        <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) ?>
+    <p><?php
+    if(!Yii::$app->user->isGuest)
+            {
+                $rol= Yii::$app->user->identity->rol;
+                if($rol=="A" || $rol=="M")
+                {
+                    echo( Html::a(Yii::t('app', 'Update'), ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) );
+                    echo( Html::a(Yii::t('app', 'Delete'), ['delete', 'id' => $model->id], [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                            'method' => 'post',
+                        ],
+                    ]) );
+                }
+
+                if($rol=="N"){
+                    echo( Html::a(Yii::t('app', 'Dejar de seguir'), ['delete', 'id' => $model->id], [
+                        'class' => 'btn btn-danger',
+                        'data' => [
+                            'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                            'method' => 'post',
+                        ],
+                    ]) );
+                }
+                
+            }?>
     </p>
 
     <?= DetailView::widget([
@@ -35,5 +53,4 @@ $this->params['breadcrumbs'][] = $this->title;
             'fecha_seguimiento',
         ],
     ]) ?>
-
 </div>
