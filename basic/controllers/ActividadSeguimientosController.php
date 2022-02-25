@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use Yii;
+
 use app\models\ActividadSeguimientos;
 use app\models\ActividadSeguimientosSearch;
 use app\models\Actividades;
@@ -93,7 +95,31 @@ class ActividadSeguimientosController extends Controller
         ]);
     }
 
-     
+    public function actionSeguir()
+    {
+       
+        $model = new ActividadSeguimientos();
+        $model->usuario_id=Yii::$app->user->identity->id;
+        $model->fecha_seguimiento=date('Y-m-d H:i:s');
+           
+        if ($model->load(Yii::$app->request->post()) ) {
+            if($model->save())
+                return $this->redirect(['fichaseguimientos']);
+        }
+       
+       
+        $all = Actividades::find()->all();
+        $list =array();
+        foreach ($all as  $value) {
+           
+           if(ActividadSeguimientos::find()->where(['usuario_id' => Yii::$app->user->identity->id,'actividad_id'=>$value->id])->one()==false)
+             $list[$value->id]=$value->titulo;
+        }
+        return $this->render('seguir', [
+            'model' => $model,
+            'lista'=>$list,
+        ]);
+    }
 
     /**
      * Updates an existing ActividadSeguimientos model.
@@ -126,7 +152,7 @@ class ActividadSeguimientosController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['fichaseguimientos']);
     }
 
     /**
