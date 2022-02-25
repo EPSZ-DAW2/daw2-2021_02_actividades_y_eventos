@@ -28,6 +28,7 @@ class AreaController extends Controller
 		]);
 	}
 
+
 	/**
 	 * Lists all Area models.
 	 *
