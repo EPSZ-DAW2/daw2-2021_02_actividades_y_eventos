@@ -1,6 +1,7 @@
 <?php
 
 namespace app\models;
+use app\models\ActividadSeguimientos;
 
 use Yii;
 

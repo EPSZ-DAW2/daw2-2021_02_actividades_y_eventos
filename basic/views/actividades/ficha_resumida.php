@@ -4,6 +4,7 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
 use yii\helpers\Url;
+use app\models\Actividades;
 
 //http://localhost/DAW2/trabajo/daw2-2021_02_actividades_y_eventos/basic/web/?r=actividades%2Fficharesumida
 /* @var $this yii\web\View */
@@ -16,8 +17,6 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="actividades-index">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-
     
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -64,18 +63,19 @@ $this->params['breadcrumbs'][] = $this->title;
             //['class' => 'yii\grid\ActionColumn', ],
             [
                 'class' => 'yii\grid\ActionColumn', 
-                'template' => '{view} {Seguir}',
-                'buttons' => [
-                    'Seguir' => function($url, $model, $key) {
+                'template' => '{view}',
+                /*'buttons' => [
+                    'Seguir' => function($url, $model) {
                         $rol= Yii::$app->user->identity->rol;
-                        if($rol!="N") return '';
-                        return Html::a('Seguir', ['/actividades/follow'], ['class' => 'btn btn-primary']);
+                        if($rol=="N"){
+                            echo( Html::a(Yii::t('app', 'Seguir'), ['actividadSeguimientos/create', 'id' => $model->id], ['class' => 'btn btn-primary']) );
+                        }else
+                            return '';
+                        
                     }
-                ],
+                ],*/
             ],
         ]
     ]); ?>
-
-
 
 </div>
