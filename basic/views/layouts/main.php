@@ -61,7 +61,7 @@ $navItems=[
 
     if ($rol=="N") 
     {
-        array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/InscribirseActividad']]);
+        array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
         //array_push($navItems,['label' => 'NOTIFICACIONES', 'url' => ['/actividades/index']]);
     }
 
