@@ -12,12 +12,11 @@ use app\models\Actividades;
 <div class="actividad-seguimientos-form">
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model->actividadSeguimientos, 'actividad_id')->textInput() ?>
+    <?= $form->field($model, 'actividad_id')->dropDownList($lista,['style'=>'width:25%'])->label('Seguir actividad') ?>
+    <?= $form->field($model, 'usuario_id')->hiddenInput()->label(false) ?>
+    <?= $form->field($model, 'fecha_seguimiento')->hiddenInput()->label(false) ?>
 
-    <?= $form->field($model->actividadSeguimientos, 'usuario_id')->textInput() ?>
-
-    <?= $form->field($model->actividadSeguimientos, 'fecha_seguimiento')->textInput() ?>
-
+    </br>
     <div class="form-group">
         <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>

@@ -1,5 +1,6 @@
 <?php
 
+use app\models\Actividades;
 use yii\helpers\Html;
 use yii\grid\GridView;
 use yii\widgets\Pjax;
@@ -16,7 +17,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <h1><?= Html::encode($this->title) ?></h1>
 
-
+    <p>
+        <?= Html::a(Yii::t('app', 'Seguir una actividad'), ['actividad-seguimientos/seguir'], ['class' => 'btn btn-success']) ?>
+    </p>
     
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
@@ -24,12 +27,27 @@ $this->params['breadcrumbs'][] = $this->title;
         'columns' => [
             ['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'actividad_id',
+            //'id',
+            //'actividad_id',
             //'usuario_id',
-            'fecha_seguimiento',
+            //'fecha_seguimiento',
 
-            ['class' => 'yii\grid\ActionColumn'],
+            [
+                'attribute' => 'Actividad',
+                'value' => function ($model) {
+                    return Actividades::find()->where(['id'=>$model->actividad_id])->one()->titulo;
+                }
+            ],
+
+            [
+                'attribute' => 'Fecha inicio de seguimiento',
+                'value' => 'fecha_seguimiento',
+            ],
+
+            [
+                'class' => 'yii\grid\ActionColumn',
+                'template'=>'{view} {delete}',
+            ],
         ]
     ]); ?>
 
