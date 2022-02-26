@@ -97,16 +97,14 @@ class ActividadSeguimientosController extends Controller
 
     public function actionSeguir()
     {
-       
         $model = new ActividadSeguimientos();
         $model->usuario_id=Yii::$app->user->identity->id;
         $model->fecha_seguimiento=date('Y-m-d H:i:s');
            
-        if ($model->load(Yii::$app->request->post()) ) {
+        if ($model->load(Yii::$app->request->post())){
             if($model->save())
                 return $this->redirect(['fichaseguimientos']);
         }
-       
        
         $all = Actividades::find()->all();
         $list =array();
