@@ -57,8 +57,11 @@ class ActividadSeguimientosController extends Controller
      */
     public function actionView($id)
     {
+        $searchModel = new ActividadSeguimientosSearch();
+        $dataProvider = $searchModel->search(['ActividadSeguimientosSearch'=>['id'=>$_GET['id']]]);
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
         ]);
     }
 
