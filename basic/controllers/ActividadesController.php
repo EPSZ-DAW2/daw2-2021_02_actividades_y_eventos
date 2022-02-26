@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use Yii;
+
 use app\models\Actividades;
 use app\models\ActividadSeguimientosSearch;
 use app\models\ActividadesSearch;
@@ -117,6 +119,17 @@ class ActividadesController extends Controller
         ]);
     }
 
+    public function actionSeguir()
+    {
+        $model = new ActividadSeguimientos();
+        $model->usuario_id=Yii::$app->user->identity->id;
+        $model->fecha_seguimiento=date('Y-m-d H:i:s');
+        $model->actividad_id= $_GET['id'];
+        $model->save();
+
+        return $this->redirect(['ficharesumida']);
+    }
+
     /**
      * Updates an existing Actividades model.
      * If update is successful, the browser will be redirected to the 'view' page.
@@ -148,15 +161,15 @@ class ActividadesController extends Controller
     {
         $this->findModel($id)->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['ficharesumida']);
     }
 
-    public function actionDeleteseguimiento($id)
+    public function actionDeleteseguimiento()
     {
         $searchModel = new ActividadSeguimientos();
-        $model=ActividadSeguimientos::findOne($_GET['id'])->delete();
+        $model= ActividadSeguimientos::find()->where(['actividad_id'=>$_GET['id']])->one()->delete();
 
-        return $this->redirect(['index']);
+        return $this->redirect(['ficharesumida']);
     }
 
     /**

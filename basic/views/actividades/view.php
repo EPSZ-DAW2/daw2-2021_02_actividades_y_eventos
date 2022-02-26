@@ -48,7 +48,12 @@ $this->params['breadcrumbs'][] = $this->title;
                             ],
                         ]) );
                     }else{
-                        echo( Html::a(Yii::t('app', 'Seguir'), ['', 'id' => $model->id], ['class' => 'btn btn-primary']));    
+                        echo( Html::a(Yii::t('app', 'Seguir'), ['seguir', 'id' => $model->id], [
+                            'class' => 'btn btn-primary',
+                            'data' => [
+                                'method' => 'post',
+                            ]
+                        ]));    
                     }
                 }
             }
