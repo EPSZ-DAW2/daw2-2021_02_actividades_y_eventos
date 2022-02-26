@@ -2,6 +2,7 @@
 
 
 use app\models\Actividades;
+use app\models\ActividadSeguimientos;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -37,6 +38,19 @@ $this->params['breadcrumbs'][] = $this->title;
                     ]) );
                 }
                 
+                if($rol=="N"){
+                    if(isset(ActividadSeguimientos::find()->where(['actividad_id'=>$model->id])->one()->actividad_id)){
+                        echo( Html::a(Yii::t('app', 'Dejar de seguir'), ['deleteseguimiento', 'id' => $model->id], [
+                            'class' => 'btn btn-danger',
+                            'data' => [
+                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
+                                'method' => 'post',
+                            ],
+                        ]) );
+                    }else{
+                        echo( Html::a(Yii::t('app', 'Seguir'), ['', 'id' => $model->id], ['class' => 'btn btn-primary']));    
+                    }
+                }
             }
         
 

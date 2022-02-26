@@ -3,7 +3,9 @@
 namespace app\controllers;
 
 use app\models\Actividades;
+use app\models\ActividadSeguimientosSearch;
 use app\models\ActividadesSearch;
+use app\models\ActividadSeguimientos;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -145,6 +147,14 @@ class ActividadesController extends Controller
     public function actionDelete($id)
     {
         $this->findModel($id)->delete();
+
+        return $this->redirect(['index']);
+    }
+
+    public function actionDeleteseguimiento($id)
+    {
+        $searchModel = new ActividadSeguimientos();
+        $model=ActividadSeguimientos::findOne($_GET['id'])->delete();
 
         return $this->redirect(['index']);
     }
