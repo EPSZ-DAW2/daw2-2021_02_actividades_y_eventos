@@ -71,17 +71,18 @@ AppAsset::register($this);
     			'url' => ['/actividades/index'],
     		]);
     	}
+
+		if ($rol=="N") 
+   		{
+        array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
+        //array_push($navItems,['label' => 'NOTIFICACIONES', 'url' => ['/actividades/index']]);
+    	}
+		
     	array_push($navItems, [
     		'label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
     		'url' => ['/site/logout'],
     		'linkOptions' => ['data-method' => 'post'],
     	]);
-    }
-
-    if ($rol=="N") 
-    {
-        array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
-        //array_push($navItems,['label' => 'NOTIFICACIONES', 'url' => ['/actividades/index']]);
     }
 
     echo Nav::widget([
