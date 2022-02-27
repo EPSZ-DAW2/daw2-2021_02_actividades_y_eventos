@@ -2,16 +2,16 @@
 
 namespace app\controllers;
 
-use app\models\Comentarios;
-use app\models\ComentariosSearch;
+use app\models\UsuarioAreaModeracion;
+use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * ComentariosController implements the CRUD actions for Comentarios model.
+ * UsuariosAreaModeracionController implements the CRUD actions for UsuarioAreaModeracion model.
  */
-class ComentariosController extends Controller
+class UsuariosAreaModeracionController extends Controller
 {
     /**
      * @inheritDoc
@@ -32,24 +32,35 @@ class ComentariosController extends Controller
     }
 
     /**
-     * Lists all Comentarios models.
-     * @return mixed
+     * Lists all UsuarioAreaModeracion models.
+     *
+     * @return string
      */
     public function actionIndex()
     {
-        $searchModel = new ComentariosSearch();
-        $dataProvider = $searchModel->search($this->request->queryParams);
+        $dataProvider = new ActiveDataProvider([
+            'query' => UsuarioAreaModeracion::find(),
+            /*
+            'pagination' => [
+                'pageSize' => 50
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+            */
+        ]);
 
         return $this->render('index', [
-            'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Displays a single Comentarios model.
+     * Displays a single UsuarioAreaModeracion model.
      * @param int $id ID
-     * @return mixed
+     * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
@@ -60,13 +71,13 @@ class ComentariosController extends Controller
     }
 
     /**
-     * Creates a new Comentarios model.
+     * Creates a new UsuarioAreaModeracion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new Comentarios();
+        $model = new UsuarioAreaModeracion();
 
         if ($this->request->isPost) {
             if ($model->load($this->request->post()) && $model->save()) {
@@ -82,10 +93,10 @@ class ComentariosController extends Controller
     }
 
     /**
-     * Updates an existing Comentarios model.
+     * Updates an existing UsuarioAreaModeracion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
-     * @return mixed
+     * @return string|\yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionUpdate($id)
@@ -102,10 +113,10 @@ class ComentariosController extends Controller
     }
 
     /**
-     * Deletes an existing Comentarios model.
+     * Deletes an existing UsuarioAreaModeracion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
-     * @return mixed
+     * @return \yii\web\Response
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionDelete($id)
@@ -116,15 +127,15 @@ class ComentariosController extends Controller
     }
 
     /**
-     * Finds the Comentarios model based on its primary key value.
+     * Finds the UsuarioAreaModeracion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return Comentarios the loaded model
+     * @return UsuarioAreaModeracion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = Comentarios::findOne($id)) !== null) {
+        if (($model = UsuarioAreaModeracion::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

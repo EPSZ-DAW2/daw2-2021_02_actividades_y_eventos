@@ -3,6 +3,7 @@
 namespace app\controllers;
 
 use app\models\Area;
+use app\models\ListaArea;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
@@ -87,6 +88,8 @@ class AreaController extends Controller
 
 		return $this->render('create', [
 			'model' => $model,
+			'lista' => new ListaArea,
+			'padre' => new Area
 		]);
 	}
 
@@ -107,6 +110,8 @@ class AreaController extends Controller
 
 		return $this->render('update', [
 			'model' => $model,
+			'lista' => new ListaArea,
+			'padre' => new Area
 		]);
 	}
 

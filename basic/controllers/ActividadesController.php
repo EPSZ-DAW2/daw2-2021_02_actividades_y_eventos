@@ -8,7 +8,6 @@ use app\models\Actividades;
 use app\models\ActividadSeguimientosSearch;
 use app\models\ActividadesSearch;
 use app\models\ActividadSeguimientos;
-use app\models\Comentarios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -123,23 +122,12 @@ class ActividadesController extends Controller
     public function actionSeguir()
     {
         $model = new ActividadSeguimientos();
-        $model->usuario_id= Yii::$app->user->identity->id;
+        $model->usuario_id=Yii::$app->user->identity->id;
         $model->fecha_seguimiento=date('Y-m-d H:i:s');
         $model->actividad_id= $_GET['id'];
         $model->save();
 
         return $this->redirect(['ficharesumida']);
-    }
-
-    public function actionCrearComentario($id)
-    {
-        $model = new Comentarios(); 
-        $model->actividad_id= $_GET['id'];  
-        $model->crea_fecha=date('Y-m-d H:i:s');  
-        $model->crea_usuario_id= Yii::$app->user->identity->id; 
-        $model->save(); 
-           
-        return $this->redirect(['create', 'id' => $id]);
     }
 
     /**
