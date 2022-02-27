@@ -2,20 +2,23 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
+use app\models\Comentarios;
 
 /* @var $this yii\web\View */
 /* @var $model app\models\Comentarios */
 
-$this->title = $model->id;
+$this->title = $model->actividad_id;
 $this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
-\yii\web\YiiAsset::register($this);
 ?>
 <div class="comentarios-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
+    <?php
+        $rol= Yii::$app->user->identity->rol;
+        if($rol=="A" || $rol=="M"){?>
         <?= Html::a('Update', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
         <?= Html::a('Delete', ['delete', 'id' => $model->id], [
             'class' => 'btn btn-danger',
@@ -24,26 +27,29 @@ $this->params['breadcrumbs'][] = $this->title;
                 'method' => 'post',
             ],
         ]) ?>
+    <?php } ?>
     </p>
-
+            
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'actividad_id',
-            'crea_usuario_id',
+            //'id',
+            //'actividad_id',
+            //'crea_usuario_id',
             'crea_fecha',
-            'modi_usuario_id',
-            'modi_fecha',
+            //'modi_usuario_id',
+            //'modi_fecha',
+            //'comentario_id',
             'texto:ntext',
-            'comentario_id',
-            'cerrado',
+            //'cerrado',
             'num_denuncias',
-            'fecha_denuncia1',
+            //'fecha_denuncia1',
             'bloqueado',
             'fecha_bloqueo',
             'notas_bloqueo:ntext',
         ],
     ]) ?>
-
+    
+    <?=Html::a('Responder', ['createres', 'id' => $model->id, 'actividad_id' => $model->actividad_id, 'comentario_id' => '1'], ['class' => 'btn btn-primary']) ?>
+    <?=Html::a('Ver respuestas',['viewrespuestas', 'id' => $model->id, 'actividad_id'=>$model->actividad_id, 'comentario_id'=>'1'],['class' => 'btn btn-primary']) ?>
 </div>

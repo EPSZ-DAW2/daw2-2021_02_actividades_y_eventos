@@ -17,6 +17,7 @@ $this->params['breadcrumbs'][] = $model->comentario_id;
     <?= $this->render('_form', [
         'model' => $model,
         'actividad' => $actividad_id,
+        'comentario_id' => $model->comentario_id,
     ]) ?>
 
 </div>

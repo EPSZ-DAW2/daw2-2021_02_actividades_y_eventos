@@ -131,15 +131,13 @@ class ActividadesController extends Controller
         return $this->redirect(['ficharesumida']);
     }
 
-    public function actionCrearComentario($id)
+    public function actionCreateres($id)
     {
         $model = new Comentarios(); 
-        $model->actividad_id= $_GET['id'];  
-        $model->crea_fecha=date('Y-m-d H:i:s');  
-        $model->crea_usuario_id= Yii::$app->user->identity->id; 
+        $model->comentario_id=1; 
         $model->save(); 
            
-        return $this->redirect(['create', 'id' => $id]);
+        return $this->redirect(['create', 'comentario_id' => $model->comentario_id]);
     }
 
     /**
