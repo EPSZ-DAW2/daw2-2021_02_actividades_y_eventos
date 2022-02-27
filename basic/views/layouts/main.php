@@ -75,7 +75,7 @@ AppAsset::register($this);
 		if ($rol=="N") 
    		{
         array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
-        //array_push($navItems,['label' => 'NOTIFICACIONES', 'url' => ['/actividades/index']]);
+        array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumida']]);
     	}
 		
     	array_push($navItems, [

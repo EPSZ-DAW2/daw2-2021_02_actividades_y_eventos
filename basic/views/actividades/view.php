@@ -57,10 +57,11 @@ $this->params['breadcrumbs'][] = $this->title;
                     }
                 }
             }
-        
 
-        
-         ?>
+        ?><td>
+        <?php
+            echo Html::a('Comentarios', ['comentarios/index', 'id' => $model->id], ['class' => 'btn btn-primary']);
+        ?>
     </p>
 
     <?= DetailView::widget([
@@ -75,33 +76,33 @@ $this->params['breadcrumbs'][] = $this->title;
             'direccion:ntext',
             'como_llegar:ntext',
             'notas_lugar:ntext',
-            'area_id',
-            'notas:ntext',
-            'url:ntext',
-            'imagen_id',
-            'edad_id',
-            'publica',
-            'visible',
-            'terminada',
+            //'area_id',
+            //'notas:ntext',
+            //'url:ntext',
+            //'imagen_id',
+            //'edad_id',
+            //'publica',
+            //'visible',
+            //'terminada',
             'fecha_terminacion',
             'notas_terminacion:ntext',
-            'num_denuncias',
-            'fecha_denuncia1',
-            'bloqueada',
-            'fecha_bloqueo',
-            'notas_bloqueo:ntext',
+            //'num_denuncias',
+            //'fecha_denuncia1',
+            //'bloqueada',
+            //'fecha_bloqueo',
+            //'notas_bloqueo:ntext',
             'max_participantes',
             'min_participantes',
             'reserva_participantes',
-            'formulario_participacion:ntext',
-            'votosOK',
-            'votosKO',
-            'crea_usuario_id',
-            'crea_fecha',
-            'modi_usuario_id',
-            'modi_fecha',
-            'notas_admin:ntext',
+            //'formulario_participacion:ntext',
+            //'votosOK',
+            //'votosKO',
+            //'crea_usuario_id',
+            //'crea_fecha',
+            //'modi_usuario_id',
+            //'modi_fecha',
+            //'notas_admin:ntext',
         ],
-    ]) ?>
+    ])?> 
 
 </div>

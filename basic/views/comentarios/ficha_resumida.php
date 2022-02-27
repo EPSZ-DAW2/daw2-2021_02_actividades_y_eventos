@@ -1,14 +1,16 @@
 <?php
 
+use app\models\Actividades;
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\models\Actividades;
+use yii\widgets\Pjax;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\ComentariosSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Comentarios';
+$this->title = Yii::t('app', 'Ficha Resumida de comentarios realizados');
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="comentarios-index">
@@ -16,12 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     
-    <?php 
-    
-    echo Html::a(Yii::t('app', 'Dar tu opinion'), ['create', 'actividad_id' => $_GET['id'], 'id' => $_GET['id']], ['class' => 'btn btn-primary']);
-    // echo $this->render('_search', ['model' => $searchModel]); ?>
-
-<?= GridView::widget([
+    <?= GridView::widget([
         'dataProvider' => $dataProvider,
         //'filterModel' => $searchModel,
         'columns' => [
@@ -46,6 +43,7 @@ $this->params['breadcrumbs'][] = $this->title;
             ],
         ]
     ]); ?>
+
 
 
 </div>

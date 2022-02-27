@@ -8,6 +8,7 @@ use yii\helpers\Html;
 $this->title = 'Create Comentarios';
 $this->params['breadcrumbs'][] = ['label' => 'Comentarios', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
+$this->params['breadcrumbs'][] = $model->comentario_id;
 ?>
 <div class="comentarios-create">
 
@@ -15,6 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+        'actividad' => $actividad_id,
     ]) ?>
 
 </div>
