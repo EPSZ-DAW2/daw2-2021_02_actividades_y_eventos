@@ -2,7 +2,6 @@
 
 
 use app\models\Actividades;
-use app\models\ActividadSeguimientos;
 use yii\helpers\Html;
 use yii\widgets\DetailView;
 
@@ -20,8 +19,8 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?php 
-        
+        <?php
+
 
             if(!Yii::$app->user->isGuest)
             {
@@ -37,6 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) );
                 }
+<<<<<<< HEAD
                 
                 if($rol=="N"){
                     if(isset(ActividadSeguimientos::find()->where(['actividad_id'=>$model->id])->one()->actividad_id)){
@@ -62,6 +62,14 @@ $this->params['breadcrumbs'][] = $this->title;
         <?php
             echo Html::a('Comentarios', ['comentarios/index', 'id' => $model->id], ['class' => 'btn btn-primary']);
         ?>
+=======
+
+            }
+
+
+
+         ?>
+>>>>>>> f2cc545992cddd6e0432ca5abe3b014e02390c38
     </p>
 
     <?= DetailView::widget([
