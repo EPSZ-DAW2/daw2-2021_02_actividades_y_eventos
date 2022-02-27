@@ -5,10 +5,9 @@ namespace app\controllers;
 use Yii;
 
 use app\models\Actividades;
-use app\models\ActividadSeguimientosSearch;
+use app\models\Comentarios;
 use app\models\ActividadesSearch;
 use app\models\ActividadSeguimientos;
-use app\models\Comentarios;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -123,7 +122,7 @@ class ActividadesController extends Controller
     public function actionSeguir()
     {
         $model = new ActividadSeguimientos();
-        $model->usuario_id= Yii::$app->user->identity->id;
+        $model->usuario_id=Yii::$app->user->identity->id;
         $model->fecha_seguimiento=date('Y-m-d H:i:s');
         $model->actividad_id= $_GET['id'];
         $model->save();

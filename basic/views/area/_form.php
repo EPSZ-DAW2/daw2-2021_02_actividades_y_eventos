@@ -12,14 +12,12 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'clase_area_id')->textInput(['maxlength' => true]) ?>
-
+    <?= $form->field($model, 'clase_area_id')->dropDownList($lista, ['prompt' => 'Seleccione la clase de area' ]) ?>
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'area_id')->textInput() ?>
+	<?= $form->field($model, 'area_id')->dropDownList($padre, ['prompt' => 'Seleccione al padre' ])?>
 
     <div class="form-group">
-        <?= Html::submitButton('Save', ['class' => 'btn btn-success']) ?>
+        <?= Html::submitButton('Guardar', ['class' => 'btn btn-success']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>

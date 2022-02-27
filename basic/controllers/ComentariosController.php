@@ -9,7 +9,6 @@ use app\models\ComentariosSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use app\models\Actividades;
 use yii\data\ActiveDataProvider;
 
 /**
@@ -94,6 +93,7 @@ class ComentariosController extends Controller
             'dataProvider' => $dataProvider,
         ]);
     }
+
 
     /**
      * Creates a new Comentarios model.

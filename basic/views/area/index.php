@@ -31,7 +31,7 @@ $this->params['breadcrumbs'][] = $this->title;
             'area_id',
             [
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Area $model, $key, $index, $column) {
+                'urlCreator' => function ($action, app\models\Area $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],

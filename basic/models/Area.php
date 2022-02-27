@@ -41,7 +41,6 @@ class Area extends \yii\db\ActiveRecord
 	public function attributeLabels()
 	{
 		return [
-			'id' => 'ID',
 			'clase_area_id' => 'Clase Area ID',
 			'nombre' => 'Nombre',
 			'area_id' => 'Area ID',

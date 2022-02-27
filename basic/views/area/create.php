@@ -15,6 +15,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+		'lista' =>  \yii\helpers\ArrayHelper::map($lista::find()->all(), 'id', 'nombre_area'),
+		'padre' =>  \yii\helpers\ArrayHelper::map($padre::find()->all(), 'id', 'nombre'),
+
     ]) ?>
 
 </div>
