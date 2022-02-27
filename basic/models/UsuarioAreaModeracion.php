@@ -6,7 +6,7 @@ use Yii;
 
 /**
  * This is the model class for table "usuarios_area_moderacion".
- *
+ *s
  * @property int $id
  * @property int $usuario_id Usuario relacionado con un Area para su moderación.
  * @property int $area_id Area relacionada con el Usuario que puede moderarla.
