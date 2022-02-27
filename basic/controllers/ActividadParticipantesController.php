@@ -42,7 +42,6 @@ class ActividadParticipantesController extends Controller
         $searchModel = new ActividadParticipantesSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
-
         return $this->render('index', [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,

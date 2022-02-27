@@ -59,7 +59,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
         ?><td>
         <?php
-            echo Html::a('Comentarios', ['comentarios/index', 'id' => $model->id, 'actividad_id'=>$model->id], ['class' => 'btn btn-primary']);
+            echo Html::a('Comentarios', ['comentarios/index', 'id' => $model->id], ['class' => 'btn btn-primary']);
         ?>
 
 

@@ -5,7 +5,7 @@ namespace app\controllers;
 use Yii;
 
 use app\models\Actividades;
-use app\models\Comentarios;
+use app\models\ActividadSeguimientosSearch;
 use app\models\ActividadesSearch;
 use app\models\ActividadSeguimientos;
 use yii\web\Controller;
@@ -128,15 +128,6 @@ class ActividadesController extends Controller
         $model->save();
 
         return $this->redirect(['ficharesumida']);
-    }
-
-    public function actionCreateres($id)
-    {
-        $model = new Comentarios(); 
-        $model->comentario_id=1; 
-        $model->save(); 
-           
-        return $this->redirect(['create', 'comentario_id' => $model->comentario_id]);
     }
 
     /**

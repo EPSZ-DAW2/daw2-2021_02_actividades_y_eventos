@@ -48,6 +48,15 @@ $navItems=[
     ['label' => 'Imagenes', 'url' => ['/actividad-imagen/index']],
   ];
 
+$opciones = ['label' => 'Opciones de usuario' , 'items' => [
+    ['label' => 'Mi Perfil', 'url' => ['/usuarios/']],
+    ['label' => 'Avisos y Notificaciones', 'url' => ['/usuario-avisos/index']],
+    ['label' => 'Actividades Propias (aprovechando lo creado en F2)', 'url' => ['/actividad-imagen/index']],
+    ['label' => 'Actividades en Seguimiento (F2)', 'url' => ['/actividad-imagen/index']],
+    ['label' => 'Actividades como Participante (F2, F4)', 'url' => ['/actividad-participante/index']],
+    ['label' => 'Comentarios en Actividades (F2, F3)', 'url' => ['/actividad-comentarios/index']],// no hay clase
+    ['label' => 'Alertas y Notas (F5).', 'url' => ['/usuario-avisos/index']],
+]];
   if (Yii::$app->user->isGuest)
   {
     array_push($navItems,['label' => 'Sign In', 'url' => ['/site/signin']],['label' => 'Login', 'url' => ['/site/login']]);
@@ -56,20 +65,20 @@ $navItems=[
   {
     $rol= Yii::$app->user->identity->rol;
     //$lista_actividad = ['label' => 'ACt', $lista_actividad];
-    if ($rol=="N") {
-        array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
-        array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumida']]);
-    }
-
     if ($rol == 'A' || $rol == 'M') {
-        array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumidaadmin']]);
         array_push($navItems, ['label' => 'ADMIN USUARIOS', 'url' => ['/usuarios/index']]);
         array_push($navItems, [
             'label' => 'ADMIN ACTIVIDADES',
             'url' => ['/actividades/index'],
         ]);
+    $navItems[] = ['label' => 'Areas del Moderador', 'url' => ['/usuario-area-moderacion/index']];
     }
 
+    if ($rol=="N") 
+       {
+    array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
+    array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumida']]);
+    }
     
     array_push($navItems, [
         'label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
@@ -78,6 +87,7 @@ $navItems=[
     ]);
   }
 
+$navItems[] = $opciones;
 
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav ms-auto'],

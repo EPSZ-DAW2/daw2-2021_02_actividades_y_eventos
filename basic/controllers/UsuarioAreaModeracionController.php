@@ -2,21 +2,18 @@
 
 namespace app\controllers;
 
-use app\assets\Tool;
-use app\models\Actividades as Actividad;
-use app\models\ActividadEtiqueta;
-use PHPUnit\Util\Log\JSON;
+use app\models\Actividades;
+use app\models\Area;
+use app\models\UsuarioAreaModeracion;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\helpers\VarDumper;
-use yii\db\Query;
 
 /**
- * ActividadEtiquetaController implements the CRUD actions for ActividadEtiqueta model.
+ * UsuarioAreaModeracionController implements the CRUD actions for UsuarioAreaModeracion model.
  */
-class ActividadEtiquetaController extends Controller
+class UsuarioAreaModeracionController extends Controller
 {
     /**
      * @inheritDoc
@@ -37,14 +34,14 @@ class ActividadEtiquetaController extends Controller
     }
 
     /**
-     * Lists all ActividadEtiqueta models.
+     * Lists all UsuarioAreaModeracion models.
      *
      * @return string
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => ActividadEtiqueta::find(),
+            'query' => UsuarioAreaModeracion::find(),
             /*
             'pagination' => [
                 'pageSize' => 50
@@ -63,21 +60,22 @@ class ActividadEtiquetaController extends Controller
     }
 
     /**
-     * Displays a single ActividadEtiqueta model.
+     * Displays a single UsuarioAreaModeracion model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
-    public function actionView($id)
+    public function actionView()
     {
-		$collection = [];
-		foreach(ActividadEtiqueta::find()->where(['etiqueta_id' => $id ])->each() as $iter) {
-            if(($dato = $iter->actividad_id) === null) continue;
-            $collection[] = $dato;
+		$usuario = \Yii::$app->user->identity->id;
+		$lista_area = [];
+		foreach(UsuarioAreaModeracion::find()->where(['usuario_id'=>$usuario])->each() as $it){
+			$lista_area[] = $it->area_id;
 		}
 
+		$actividad = Area::find()->where(['area_id' => $lista_area ]);
         $dataProvider = new ActiveDataProvider([
-            'query' => Actividad::find()->where(['id'=> $collection])
+            'query' => $actividad
             /*
             'pagination' => [
                 'pageSize' => 50
@@ -91,22 +89,23 @@ class ActividadEtiquetaController extends Controller
         ]);
 
         return $this->render('view', [
-            'model' => $dataProvider
+            'dataProvider' => $dataProvider,
         ]);
     }
 
     /**
-     * Creates a new ActividadEtiqueta model.
+     * Creates a new UsuarioAreaModeracion model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
     public function actionCreate()
     {
-        $model = new ActividadEtiqueta();
+        $model = new UsuarioAreaModeracion();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) ) {
+			if($model->save())
+                return $this->redirect(['index', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
@@ -114,11 +113,12 @@ class ActividadEtiquetaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+			'area' => Area::find()->all()
         ]);
     }
 
     /**
-     * Updates an existing ActividadEtiqueta model.
+     * Updates an existing UsuarioAreaModeracion model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -138,7 +138,7 @@ class ActividadEtiquetaController extends Controller
     }
 
     /**
-     * Deletes an existing ActividadEtiqueta model.
+     * Deletes an existing UsuarioAreaModeracion model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -152,15 +152,15 @@ class ActividadEtiquetaController extends Controller
     }
 
     /**
-     * Finds the ActividadEtiqueta model based on its primary key value.
+     * Finds the UsuarioAreaModeracion model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return ActividadEtiqueta the loaded model
+     * @return UsuarioAreaModeracion the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ActividadEtiqueta::findOne(['id' => $id])) !== null) {
+        if (($model = UsuarioAreaModeracion::findOne(['id' => $id])) !== null) {
             return $model;
         }
 

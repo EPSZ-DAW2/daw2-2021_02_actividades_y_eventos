@@ -19,7 +19,7 @@ use app\models\Actividades;
     $modificar = 0;
 
     ?>
-    <?= $form->field($model, 'actividad_id')->hiddenInput(['value' => $_GET['actividad_id']])->label(false) ?>
+    <?= $form->field($model, 'actividad_id')->hiddenInput(['value' => $_GET['id']])->label(false) ?>
     <?= $form->field($model, 'crea_usuario_id')->hiddenInput(['value' => $id])->label(false) ?>
     <?= $form->field($model, 'crea_fecha')->hiddenInput(['value' => $fecha_hora])->label(false) ?>
     <?= $form->field($model, 'modi_usuario_id')->hiddenInput()->label(false) ?>
