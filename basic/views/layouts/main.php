@@ -48,29 +48,6 @@ $navItems=[
     ['label' => 'Imagenes', 'url' => ['/actividad-imagen/index']],
   ];
 
-<<<<<<< HEAD
-
-    	//$lista_actividad = ['label' => 'ACt', $lista_actividad];
-    	if ($rol == 'A' || $rol == 'M') {
-    		array_push($navItems, ['label' => 'ADMIN USUARIOS', 'url' => ['/usuarios/index']]);
-    		array_push($navItems, [
-    			'label' => 'ADMIN ACTIVIDADES',
-    			'url' => ['/actividades/index'],
-    		]);
-    	}
-
-		if ($rol=="N") 
-   		{
-        array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
-        array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumida']]);
-    	}
-		
-    	array_push($navItems, [
-    		'label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
-    		'url' => ['/site/logout'],
-    		'linkOptions' => ['data-method' => 'post'],
-    	]);
-=======
   if (Yii::$app->user->isGuest)
   {
     array_push($navItems,['label' => 'Sign In', 'url' => ['/site/signin']],['label' => 'Login', 'url' => ['/site/login']]);
@@ -78,16 +55,26 @@ $navItems=[
   else
   {
     $rol= Yii::$app->user->identity->rol;
-    if ($rol=="A" || $rol=="M")
-    {
-        array_push($navItems,['label' => 'ADMIN USUARIOS', 'url' => ['/usuarios/index']]);
-        array_push($navItems,['label' => 'ADMIN ACTIVIDADES', 'url' => ['/actividades/index']]);
->>>>>>> f2cc545992cddd6e0432ca5abe3b014e02390c38
+    //$lista_actividad = ['label' => 'ACt', $lista_actividad];
+    if ($rol == 'A' || $rol == 'M') {
+        array_push($navItems, ['label' => 'ADMIN USUARIOS', 'url' => ['/usuarios/index']]);
+        array_push($navItems, [
+            'label' => 'ADMIN ACTIVIDADES',
+            'url' => ['/actividades/index'],
+        ]);
     }
-    array_push($navItems,['label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
+
+    if ($rol=="N") 
+       {
+    array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
+    array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumida']]);
+    }
+    
+    array_push($navItems, [
+        'label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
         'url' => ['/site/logout'],
-        'linkOptions' => ['data-method' => 'post']]
-    );
+        'linkOptions' => ['data-method' => 'post'],
+    ]);
   }
 
 
