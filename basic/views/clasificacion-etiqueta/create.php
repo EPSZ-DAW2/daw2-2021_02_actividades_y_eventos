@@ -3,19 +3,18 @@
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
-/* @var $model app\models\ActividadImagenes */
+/* @var $model app\models\ClasificacionEtiqueta */
 
-$this->title = 'Create Actividad Imagenes';
-$this->params['breadcrumbs'][] = ['label' => 'Actividad Imagenes', 'url' => ['index']];
+$this->title = 'Create Clasificacion Etiqueta';
+$this->params['breadcrumbs'][] = ['label' => 'Clasificacion Etiquetas', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="actividad-imagenes-create">
+<div class="clasificacion-etiqueta-create">
 
     <h1><?= Html::encode($this->title) ?></h1>
 
     <?= $this->render('_form', [
         'model' => $model,
-		'acti' => $acti
     ]) ?>
 
 </div>

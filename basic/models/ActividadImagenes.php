@@ -14,36 +14,49 @@ use Yii;
  */
 class ActividadImagenes extends \yii\db\ActiveRecord
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function tableName()
-    {
-        return 'actividad_imagenes';
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public $image;
+	public static function tableName()
+	{
+		return 'actividad_imagenes';
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function rules()
-    {
-        return [
-            [['actividad_id', 'imagen_id'], 'required'],
-            [['actividad_id', 'orden'], 'integer'],
-            [['imagen_id'], 'string', 'max' => 25],
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function rules()
+	{
+		return [
+			[['actividad_id', 'imagen_id'], 'required'],
+			[['actividad_id', 'orden'], 'integer'],
+			[['imagen_id'], 'string', 'max' => 25],
+			[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
+		];
+	}
 
-    /**
-     * {@inheritdoc}
-     */
-    public function attributeLabels()
-    {
-        return [
-            'id' => 'ID',
-            'actividad_id' => 'Actividad ID',
-            'orden' => 'Orden',
-            'imagen_id' => 'Imagen ID',
-        ];
-    }
+	/**
+	 * {@inheritdoc}
+	 */
+	public function attributeLabels()
+	{
+		return [
+			'id' => 'ID',
+			'actividad_id' => 'Actividad ID',
+			'orden' => 'Orden',
+			'imagen_id' => 'Imagen ID',
+		];
+	}
+
+	public function upload()
+	{
+		if ($this->validate()) {
+			$this->imagen_id = 'imagenes/' . $this->image->baseName . '.' . $this->image->extension;
+			$i =	$this->image->saveAs($this->imagen_id);
+			var_dump($i);
+			return true;
+		}
+		return false;
+	}
 }

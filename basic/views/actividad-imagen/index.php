@@ -21,22 +21,40 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
     <?= GridView::widget([
-        'dataProvider' => $dataProvider,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+    	'dataProvider' => $dataProvider,
+    	'columns' => [
+    		['class' => 'yii\grid\SerialColumn'],
 
-            'id',
-            'actividad_id',
-            'orden',
-            'imagen_id',
-            [
-                'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, ActividadImagenes $model, $key, $index, $column) {
-                    return Url::toRoute([$action, 'id' => $model->id]);
-                 }
-            ],
-        ],
-    ]); ?>
+    		'id',
+    		'actividad_id',
+    		'orden',
+    		'imagen_id',
+    		[
+    			'attribute' => 'image',
+    			'format' => 'html',
+    			'label' => 'Imagen',
+    			'value' => function ($data) {
+    				return Html::img(
+    					'/imagenes/' . $data['image'],
+    					['width' => '60px']
+    				);
+    			},
+    		],
+
+    		[
+    			'class' => ActionColumn::className(),
+    			'urlCreator' => function (
+    				$action,
+    				ActividadImagenes $model,
+    				$key,
+    				$index,
+    				$column
+    			) {
+    				return Url::toRoute([$action, 'id' => $model->id]);
+    			},
+    		],
+    	],
+    ]) ?>
 
 
 </div>
