@@ -86,6 +86,22 @@ class ComentariosController extends Controller
     public function actionFicharesumida()
     {
         $searchModel = new ComentariosSearch();
+        $id= Yii::$app->user->id;
+        $query= Comentarios::find()->where(['crea_usuario_id' => $id]);
+        
+        $dataProvider = new ActiveDataProvider([
+            'query' => $query,
+        ]);
+
+        return $this->render('ficha_resumida', [
+            'searchModel' => $searchModel,
+            'dataProvider' => $dataProvider,
+        ]);
+    }
+
+    public function actionFicharesumidaadmin()
+    {
+        $searchModel = new ComentariosSearch();
         $dataProvider = $searchModel->search($this->request->queryParams);
 
         return $this->render('ficha_resumida', [

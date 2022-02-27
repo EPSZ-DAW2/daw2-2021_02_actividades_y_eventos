@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'attributes' => [
             //'id',
             //'actividad_id',
-            //'crea_usuario_id',
+            'crea_usuario_id',
             'crea_fecha',
             //'modi_usuario_id',
             //'modi_fecha',

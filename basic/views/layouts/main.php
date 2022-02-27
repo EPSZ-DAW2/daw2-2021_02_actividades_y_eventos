@@ -56,7 +56,13 @@ $navItems=[
   {
     $rol= Yii::$app->user->identity->rol;
     //$lista_actividad = ['label' => 'ACt', $lista_actividad];
+    if ($rol=="N") {
+        array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
+        array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumida']]);
+    }
+
     if ($rol == 'A' || $rol == 'M') {
+        array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumidaadmin']]);
         array_push($navItems, ['label' => 'ADMIN USUARIOS', 'url' => ['/usuarios/index']]);
         array_push($navItems, [
             'label' => 'ADMIN ACTIVIDADES',
@@ -64,11 +70,6 @@ $navItems=[
         ]);
     }
 
-    if ($rol=="N") 
-       {
-    array_push($navItems,['label' => 'Seguimiento Actividades', 'url' => ['/actividad-seguimientos/fichaseguimientos']]);
-    array_push($navItems,['label' => 'Comentarios', 'url' => ['/comentarios/ficharesumida']]);
-    }
     
     array_push($navItems, [
         'label' => 'Logout (' . Yii::$app->user->identity->nick . ')',
