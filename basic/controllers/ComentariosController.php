@@ -144,6 +144,13 @@ class ComentariosController extends Controller
         ]);
     }
 
+    public function actionDenunciar($id)
+    {
+        return $this->render('denunciar', [
+            'model' => $this->findModel($id),
+        ]);
+    }
+
     /**
      * Updates an existing Comentarios model.
      * If update is successful, the browser will be redirected to the 'view' page.

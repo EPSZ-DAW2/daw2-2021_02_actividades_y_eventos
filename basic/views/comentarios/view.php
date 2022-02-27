@@ -52,4 +52,12 @@ $this->params['breadcrumbs'][] = $this->title;
     
     <?=Html::a('Responder', ['createres', 'id' => $model->id, 'actividad_id' => $model->actividad_id, 'comentario_id' => '1'], ['class' => 'btn btn-primary']) ?>
     <?=Html::a('Ver respuestas',['viewrespuestas', 'id' => $model->id, 'actividad_id'=>$model->actividad_id, 'comentario_id'=>'1'],['class' => 'btn btn-primary']) ?>
+    
+    <?= Html::a('Denunciar', ['denunciar', 'id' => $model->id], [
+            'class' => 'btn btn-danger',
+            'data' => [
+                'confirm' => 'Are you sure you want to report this item?',
+                'method' => 'post',
+            ], 
+    ])?>
 </div>
