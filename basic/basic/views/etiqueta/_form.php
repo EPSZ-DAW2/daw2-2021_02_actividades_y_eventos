@@ -11,7 +11,6 @@ use yii\widgets\ActiveForm;
 <div class="etiqueta-form">
 
     <?php $form = ActiveForm::begin(); ?>
-
     <?= $form->field($model, 'nombre')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">

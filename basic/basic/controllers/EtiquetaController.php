@@ -2,6 +2,8 @@
 
 namespace app\controllers;
 
+use app\models\Actividades;
+use app\models\ActividadEtiqueta;
 use app\models\Etiqueta;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
@@ -89,6 +91,7 @@ class EtiquetaController extends Controller
 
         return $this->render('create', [
             'model' => $model,
+			'acti' => Actividades::find()->all()
         ]);
     }
 
@@ -109,6 +112,7 @@ class EtiquetaController extends Controller
 
         return $this->render('update', [
             'model' => $model,
+			'acti' => Actividades::find()->all()
         ]);
     }
 
@@ -121,8 +125,9 @@ class EtiquetaController extends Controller
      */
     public function actionDelete($id)
     {
-        $this->findModel($id)->delete();
-
+		$actividades = ActividadEtiqueta::find()->where(['etiqueta_id' => $id])->one();
+		if($actividades === null)
+			$this->findModel($id)->delete();
         return $this->redirect(['index']);
     }
 

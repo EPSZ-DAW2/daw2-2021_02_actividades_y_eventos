@@ -36,25 +36,7 @@ $this->params['breadcrumbs'][] = $this->title;
                         ],
                     ]) );
                 }
-                
-                if($rol=="N"){
-                    if(isset(ActividadSeguimientos::find()->where(['actividad_id'=>$model->id])->one()->actividad_id)){
-                        echo( Html::a(Yii::t('app', 'Dejar de seguir'), ['deleteseguimiento', 'id' => $model->id], [
-                            'class' => 'btn btn-danger',
-                            'data' => [
-                                'confirm' => Yii::t('app', 'Are you sure you want to delete this item?'),
-                                'method' => 'post',
-                            ],
-                        ]) );
-                    }else{
-                        echo( Html::a(Yii::t('app', 'Seguir'), ['seguir', 'id' => $model->id], [
-                            'class' => 'btn btn-primary',
-                            'data' => [
-                                'method' => 'post',
-                            ]
-                        ]));    
-                    }
-                }
+
             }
 
         ?><td>
@@ -65,6 +47,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 
 
+         ?>
     </p>
 
     <?= DetailView::widget([
@@ -106,6 +89,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'modi_fecha',
             //'notas_admin:ntext',
         ],
-    ])?> 
+    ])?>
 
 </div>

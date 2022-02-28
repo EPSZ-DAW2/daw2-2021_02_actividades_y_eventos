@@ -2,11 +2,14 @@
 
 namespace app\controllers;
 
+use app\assets\Tool;
+use app\models\Actividades;
 use app\models\ActividadImagenes;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
 
 /**
  * ActividadImagenController implements the CRUD actions for ActividadImagenes model.
@@ -75,19 +78,25 @@ class ActividadImagenController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate()
+    public function actionCreate($actividad = 1)
     {
         $model = new ActividadImagenes();
+
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) && $model->save()) {
-                return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) ) {
+				$model->image = UploadedFile::getInstance($model,'image');
+				if($model->upload())
+					if($model->save())
+					return $this->redirect(['view', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
         }
 
+		//return Tool::json(Actividades::find($actividad)->one());
         return $this->render('create', [
             'model' => $model,
+			'acti' => Actividades::find()->all()
         ]);
     }
 

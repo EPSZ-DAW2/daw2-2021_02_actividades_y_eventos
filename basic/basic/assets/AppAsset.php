@@ -29,3 +29,12 @@ class AppAsset extends AssetBundle
         'yii\bootstrap5\BootstrapAsset',
     ];
 }
+
+ class Tool {
+	public static function json($collect) {
+        $response = \Yii::$app->response;
+        $response->format = \yii\web\Response::FORMAT_JSON;
+        $response->data = $collect;
+		return $response;
+	}
+}

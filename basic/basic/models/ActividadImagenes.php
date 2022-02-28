@@ -31,7 +31,7 @@ class ActividadImagenes extends \yii\db\ActiveRecord
 		return [
 			[['actividad_id', 'imagen_id'], 'required'],
 			[['actividad_id', 'orden'], 'integer'],
-			[['imagen_id'], 'string', 'max' => 25],
+			[['imagen_id'], 'string', 'max' => 50],
 			[['image'], 'file', 'skipOnEmpty' => false, 'extensions' => 'png, jpg'],
 		];
 	}
@@ -51,10 +51,9 @@ class ActividadImagenes extends \yii\db\ActiveRecord
 
 	public function upload()
 	{
+		$this->imagen_id = Yii::getAlias('@webroot').'/imagenes/' . $this->image->baseName . '.' . $this->image->extension;
 		if ($this->validate()) {
-			$this->imagen_id = 'imagenes/' . $this->image->baseName . '.' . $this->image->extension;
-			$i =	$this->image->saveAs($this->imagen_id);
-			var_dump($i);
+			$i =$this->image->saveAs($this->imagen_id);
 			return true;
 		}
 		return false;

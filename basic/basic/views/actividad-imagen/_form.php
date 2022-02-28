@@ -12,7 +12,8 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['options' => ['enctype' => 'multipart/form-data']]); ?>
 
-    <?= $acti->titulo?>
+    <?= $form->field($model, 'actividad_id')->dropDownList($acti, ['prompt'=>'Seleccione una
+	Actividad']) ?>
     <?= $form->field($model, 'orden')->textInput() ?>
 	<?= $form->field($model, 'image')->fileInput() ?>
 

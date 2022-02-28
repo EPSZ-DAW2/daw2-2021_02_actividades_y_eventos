@@ -1,5 +1,8 @@
 <?php
 
+use app\models\Actividades;
+use app\models\Etiqueta;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 
 /* @var $this yii\web\View */
@@ -15,6 +18,8 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= $this->render('_form', [
         'model' => $model,
+		'acti' => ArrayHelper::map(Actividades::find()->all(),'id','titulo'),
+		'etiqueta' => ArrayHelper::map(Etiqueta::find()->all(),'id','nombre')
     ]) ?>
 
 </div>

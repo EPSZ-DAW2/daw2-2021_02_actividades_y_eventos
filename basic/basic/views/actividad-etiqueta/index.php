@@ -2,6 +2,8 @@
 
 use app\assets\Tool;
 use app\models\Actividades;
+use app\models\ActividadEtiqueta;
+use app\models\Etiqueta;
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\grid\ActionColumn;
@@ -31,8 +33,9 @@ $this->params['breadcrumbs'][] = $this->title;
             'actividad_id',
             'etiqueta_id',
             [
+			'template' => "{delete}",
                 'class' => ActionColumn::className(),
-                //'urlCreator' => function ($action, Actividades $model, $key, $index, $column) { return Url::toRoute([$action, 'id' => $model->id]); }
+                'urlCreator' => function ($action, ActividadEtiqueta $model, $key, $index, $column) { return Url::toRoute([$action, 'id' => $model->id]); }
             ],
         ],
     ]); ?>

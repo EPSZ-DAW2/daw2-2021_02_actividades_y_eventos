@@ -28,9 +28,16 @@ $this->params['breadcrumbs'][] = $this->title;
  //           'id',
             'nombre',
             [
+				'template' => "{view}",
                 'class' => ActionColumn::className(),
-                'urlCreator' => function ($action, Etiqueta $model) {
+                'urlCreator' => function ($action, Etiqueta $model, $key, $index, $column) {
                     return Url::toRoute(['actividad-etiqueta/view', 'id' => $model->id]);
+                 }
+            ],
+            [
+				'template' => "{update} {delete}",
+                'class' => ActionColumn::className(),
+                'urlCreator' => function ($action, Etiqueta $model, $key, $index, $column) {
                     return Url::toRoute([$action, 'id' => $model->id]);
                  }
             ],
