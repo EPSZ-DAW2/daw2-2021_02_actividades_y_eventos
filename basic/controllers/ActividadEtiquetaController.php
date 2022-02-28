@@ -3,18 +3,20 @@
 namespace app\controllers;
 
 use app\assets\Tool;
-use app\models\Actividades;
-use app\models\ActividadImagenes;
+use app\models\Actividades as Actividad;
+use app\models\ActividadEtiqueta;
+use PHPUnit\Util\Log\JSON;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
-use yii\web\UploadedFile;
+use yii\helpers\VarDumper;
+use yii\db\Query;
 
 /**
- * ActividadImagenController implements the CRUD actions for ActividadImagenes model.
+ * ActividadEtiquetaController implements the CRUD actions for ActividadEtiqueta model.
  */
-class ActividadImagenController extends Controller
+class ActividadEtiquetaController extends Controller
 {
     /**
      * @inheritDoc
@@ -35,14 +37,14 @@ class ActividadImagenController extends Controller
     }
 
     /**
-     * Lists all ActividadImagenes models.
+     * Lists all ActividadEtiqueta models.
      *
      * @return string
      */
     public function actionIndex()
     {
         $dataProvider = new ActiveDataProvider([
-            'query' => ActividadImagenes::find(),
+            'query' => ActividadEtiqueta::find(),
             /*
             'pagination' => [
                 'pageSize' => 50
@@ -61,47 +63,62 @@ class ActividadImagenController extends Controller
     }
 
     /**
-     * Displays a single ActividadImagenes model.
+     * Displays a single ActividadEtiqueta model.
      * @param int $id ID
      * @return string
      * @throws NotFoundHttpException if the model cannot be found
      */
     public function actionView($id)
     {
+		$collection = [];
+		foreach(ActividadEtiqueta::find()->where(['etiqueta_id' => $id ])->each() as $iter) {
+            if(($dato = $iter->actividad_id) === null) continue;
+            $collection[] = $dato;
+		}
+
+        $dataProvider = new ActiveDataProvider([
+            'query' => Actividad::find()->where(['id'=> $collection])
+            /*
+            'pagination' => [
+                'pageSize' => 50
+            ],
+            'sort' => [
+                'defaultOrder' => [
+                    'id' => SORT_DESC,
+                ]
+            ],
+            */
+        ]);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $dataProvider
         ]);
     }
 
     /**
-     * Creates a new ActividadImagenes model.
+     * Creates a new ActividadEtiqueta model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return string|\yii\web\Response
      */
-    public function actionCreate($actividad = 1)
+    public function actionCreate()
     {
-        $model = new ActividadImagenes();
+        $model = new ActividadEtiqueta();
 
         if ($this->request->isPost) {
-            if ($model->load($this->request->post()) ) {
-				$model->image = UploadedFile::getInstance($model,'image');
-				if($model->upload())
-					if($model->save())
-					return $this->redirect(['view', 'id' => $model->id]);
+            if ($model->load($this->request->post()) && $model->save()) {
+                return $this->redirect(['index', 'id' => $model->id]);
             }
         } else {
             $model->loadDefaultValues();
         }
 
-		//return Tool::json(Actividades::find($actividad)->one());
         return $this->render('create', [
             'model' => $model,
-			'acti' => Actividades::find()->all()
         ]);
     }
 
     /**
-     * Updates an existing ActividadImagenes model.
+     * Updates an existing ActividadEtiqueta model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param int $id ID
      * @return string|\yii\web\Response
@@ -121,7 +138,7 @@ class ActividadImagenController extends Controller
     }
 
     /**
-     * Deletes an existing ActividadImagenes model.
+     * Deletes an existing ActividadEtiqueta model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param int $id ID
      * @return \yii\web\Response
@@ -135,15 +152,15 @@ class ActividadImagenController extends Controller
     }
 
     /**
-     * Finds the ActividadImagenes model based on its primary key value.
+     * Finds the ActividadEtiqueta model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param int $id ID
-     * @return ActividadImagenes the loaded model
+     * @return ActividadEtiqueta the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)
     {
-        if (($model = ActividadImagenes::findOne(['id' => $id])) !== null) {
+        if (($model = ActividadEtiqueta::findOne(['id' => $id])) !== null) {
             return $model;
         }
 
